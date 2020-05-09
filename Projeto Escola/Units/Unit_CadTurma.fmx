@@ -1,0 +1,138 @@
+object Form_CadTurma: TForm_CadTurma
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 270
+  ClientWidth = 410
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object lbDsc: TLabel
+    Position.X = 57.000000000000000000
+    Position.Y = 34.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Descri'#231#227'o'
+    TabOrder = 3
+  end
+  object edDsc: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 4
+    Position.X = 128.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 153.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object cbSemestre: TComboBox
+    Items.Strings = (
+      '1'#186' Semestre'
+      '2'#186' Semestre'
+      '3'#186' Semestre'
+      '4'#186' Semestre'
+      '5'#186' Semestre')
+    Position.X = 128.000000000000000000
+    Position.Y = 104.000000000000000000
+    Size.Width = 153.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+  end
+  object deInic: TDateEdit
+    Date = 43959.000000000000000000
+    Position.X = 84.000000000000000000
+    Position.Y = 72.000000000000000000
+    TabOrder = 7
+  end
+  object deFim: TDateEdit
+    Date = 43959.000000000000000000
+    Position.X = 255.000000000000000000
+    Position.Y = 72.000000000000000000
+    TabOrder = 6
+  end
+  object sbtnNovo: TSpeedButton
+    StyledSettings = [Family, Style, FontColor]
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 0
+    Position.X = 58.000000000000000000
+    Position.Y = 164.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Novo'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Leading
+    OnClick = sbtnNovoClick
+  end
+  object sbtnSalvar: TSpeedButton
+    StyledSettings = [Family, Style, FontColor]
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 2
+    Position.X = 151.000000000000000000
+    Position.Y = 164.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Salvar'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Leading
+    OnClick = sbtnSalvarClick
+  end
+  object sbtnExcluir: TSpeedButton
+    StyledSettings = [Family, Style, FontColor]
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 0
+    Position.X = 251.000000000000000000
+    Position.Y = 163.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Excluir'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Leading
+    OnClick = sbtnExcluirClick
+  end
+  object Label1: TLabel
+    Position.X = 198.000000000000000000
+    Position.Y = 74.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Data Fim:'
+    TabOrder = 1
+  end
+  object lbDtInic: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 75.000000000000000000
+    Size.Width = 81.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Data Inicial:'
+    TabOrder = 0
+  end
+  object Label2: TLabel
+    Position.X = 48.000000000000000000
+    Position.Y = 106.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Semestre'
+    TabOrder = 2
+  end
+  object sbtnBusca: TSpeedButton
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 1
+    Position.X = 302.000000000000000000
+    Position.Y = 31.000000000000000000
+    Size.Width = 37.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'actiontoolbutton'
+    Text = 'sbtnBusca'
+    OnClick = sbtnBuscaClick
+  end
+end

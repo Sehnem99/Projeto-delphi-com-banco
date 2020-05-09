@@ -1,0 +1,105 @@
+object Form_CadMateria: TForm_CadMateria
+  Left = 128
+  Top = 192
+  Caption = 'Form1'
+  ClientHeight = 200
+  ClientWidth = 451
+  Position = Designed
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Left = 128
+  Top = 192
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    Position.X = 96.000000000000000000
+    Position.Y = 35.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Nome:'
+    TabOrder = 1
+  end
+  object edNome: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 2
+    Position.X = 176.000000000000000000
+    Position.Y = 32.000000000000000000
+    Size.Width = 145.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object lbPeriodo: TLabel
+    Position.X = 96.000000000000000000
+    Position.Y = 75.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Periodo:'
+    TabOrder = 0
+  end
+  object cbPeriodo: TComboBox
+    Position.X = 176.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 145.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object sbtnNovo: TSpeedButton
+    StyledSettings = [Family, Style, FontColor]
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 0
+    Position.X = 90.000000000000000000
+    Position.Y = 124.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Novo'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Leading
+    OnClick = sbtnNovoClick
+  end
+  object sbtnSalvar: TSpeedButton
+    StyledSettings = [Family, Style, FontColor]
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 2
+    Position.X = 183.000000000000000000
+    Position.Y = 124.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Salvar'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Leading
+    OnClick = sbtnSalvarClick
+  end
+  object sbtnExcluir: TSpeedButton
+    StyledSettings = [Family, Style, FontColor]
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 0
+    Position.X = 283.000000000000000000
+    Position.Y = 123.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Excluir'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Leading
+    OnClick = sbtnExcluirClick
+  end
+  object sbtnBusca: TSpeedButton
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 1
+    Position.X = 342.000000000000000000
+    Position.Y = 33.000000000000000000
+    Size.Width = 37.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'actiontoolbutton'
+    Text = 'sbtnBusca'
+    OnClick = sbtnBuscaClick
+  end
+end

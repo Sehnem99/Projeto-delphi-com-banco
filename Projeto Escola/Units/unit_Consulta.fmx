@@ -1,0 +1,153 @@
+object frm_Consulta: Tfrm_Consulta
+  Left = 0
+  Top = 0
+  Caption = 'Consulta'
+  ClientHeight = 480
+  ClientWidth = 629
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnResize = FormResize
+  DesignerMasterStyle = 0
+  object sgConsulta: TStringGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    Size.Width = 629.000000000000000000
+    Size.Height = 373.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick, AutoDisplacement]
+    OnHeaderClick = sgConsultaHeaderClick
+    OnCellDblClick = sgConsultaCellDblClick
+    Viewport.Width = 625.000000000000000000
+    Viewport.Height = 348.000000000000000000
+  end
+  object Panel1: TPanel
+    Align = Top
+    Size.Width = 629.000000000000000000
+    Size.Height = 59.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object Panel3: TPanel
+      Align = Right
+      Position.X = 437.000000000000000000
+      Size.Width = 192.000000000000000000
+      Size.Height = 59.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'pushpanel'
+      TabOrder = 0
+      object Label1: TLabel
+        Position.X = 11.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 93.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'N'#186' de Registros:'
+        TabOrder = 0
+      end
+      object lbNroReg: TLabel
+        Position.X = 101.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'lbNroReg'
+        TabOrder = 1
+      end
+    end
+    object Panel4: TPanel
+      Align = Client
+      Size.Width = 437.000000000000000000
+      Size.Height = 59.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'pushpanel'
+      TabOrder = 1
+      object edPesquisa: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        Margins.Left = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 417.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChangeTracking = edPesquisaChangeTracking
+      end
+      object Panel5: TPanel
+        Align = Top
+        Size.Width = 437.000000000000000000
+        Size.Height = 29.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'pushpanel'
+        TabOrder = 1
+        object Label2: TLabel
+          Position.X = 11.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 77.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Pesquisa por:'
+          TabOrder = 0
+        end
+        object lbColPesq: TLabel
+          StyledSettings = [Family, Size, Style]
+          Position.X = 89.000000000000000000
+          Position.Y = 7.000000000000000000
+          Size.Width = 239.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.FontColor = claBlue
+          Text = '...'
+          TabOrder = 2
+        end
+      end
+    end
+  end
+  object Panel2: TPanel
+    Align = Bottom
+    Position.Y = 432.000000000000000000
+    Size.Width = 629.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object pnCarregar: TPanel
+      Align = Left
+      Size.Width = 279.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object spCarregar: TSpeedButton
+        Align = Center
+        Images = dm_BancoDados.ImageList1
+        ImageIndex = 2
+        Size.Width = 86.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Carregar'
+        TextSettings.HorzAlign = Leading
+        OnClick = spCarregarClick
+      end
+    end
+    object pnRetornar: TPanel
+      Align = Client
+      Size.Width = 350.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object spRetornar: TSpeedButton
+        Align = Center
+        Images = dm_BancoDados.ImageList1
+        ImageIndex = 3
+        Size.Width = 85.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Retornar'
+        TextSettings.HorzAlign = Leading
+        OnClick = spRetornarClick
+      end
+    end
+  end
+end

@@ -1,0 +1,53 @@
+object form_Principal: Tform_Principal
+  Left = 0
+  Top = 0
+  Caption = 'Projeto de escola'
+  ClientHeight = 521
+  ClientWidth = 725
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  ShowFullScreenIcon = True
+  DesignerMasterStyle = 0
+  object ImageControl1: TImageControl
+    Size.Width = 729.000000000000000000
+    Size.Height = 529.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object MainMenu: TMainMenu
+    Left = 88
+    Top = 48
+    object mnCadastro: TMenuItem
+      Text = 'Cadastros'
+      object mnPessoa: TMenuItem
+        Locked = True
+        Text = 'Pessoa'
+        OnClick = mnPessoaClick
+      end
+      object mnCurso: TMenuItem
+        Locked = True
+        Text = 'Curso'
+        OnClick = mnCursoClick
+      end
+      object mnPeriodo: TMenuItem
+        Locked = True
+        Text = 'Periodo'
+        OnClick = mnPeriodoClick
+      end
+      object mnCadastroTurma: TMenuItem
+        Locked = True
+        Text = 'Turma'
+        OnClick = mnCadastroTurmaClick
+      end
+      object mnMateria: TMenuItem
+        Locked = True
+        Text = 'Mat'#233'ria'
+      end
+    end
+    object MenuItem2: TMenuItem
+      Text = 'MenuItem2'
+    end
+  end
+end
