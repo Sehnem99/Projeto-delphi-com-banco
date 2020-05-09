@@ -5,7 +5,7 @@ uses
     System.SysUtils, System.Types, System.UITypes,
     System.Classes, System.Variants,
     FMX.Grid, Utilitario, FireDAC.Comp.Client,
-    unit_BancoDados, FMX.Dialogs;
+    unit_BancoDados, FMX.Dialogs, FMX.ListBox;
 
 type TConsulta = class
   private
@@ -31,6 +31,7 @@ type TConsulta = class
         procedure setcolunaRetorno(colunaRetorno:integer);
         function getcolunaRetorno:integer;
         function getConsultaID(sTable, sIDprocurado :String): Integer;
+        function getCarregaCB(vCombo: TComboBox;vField: String): TStringList;
 
 end;
 
@@ -101,6 +102,35 @@ begin
 
      qrConsulta.Close;
      FreeAndNil(qrConsulta);
+end;
+
+function TConsulta.getCarregaCB(vCombo: TComboBox;vField: String): TStringList;
+var
+   qrConsulta: TFDQuery;
+   Lista:TStringList;
+   i:integer;
+begin
+     qrConsulta := TFDQuery.Create(nil);
+     qrConsulta.Connection := dm_BancoDados.FDEscola;
+     qrConsulta.Close;
+     qrConsulta.SQL.Clear;
+     qrConsulta.SQL.Add(self.getTextosql);
+
+     try
+       qrConsulta.Open;
+
+       if (not qrConsulta.IsEmpty) then
+        begin
+          While not qrConsulta.EOF do
+            begin
+             vCombo.Items.Add(qrConsulta.FieldByName(vField).asString);
+             qrConsulta.Next;
+            end;
+        end;
+     finally
+       qrConsulta.Close;
+       FreeAndNil(qrConsulta)
+     end;
 end;
 
 function TConsulta.getcolunaRetorno: integer;

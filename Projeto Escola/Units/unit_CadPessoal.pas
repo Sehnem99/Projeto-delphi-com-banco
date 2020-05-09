@@ -79,8 +79,8 @@ begin
     //o valor 0 --> cadastrar (insert), o valor 1 --> alterar (update)
     if (vAluno.estado = 1) then
       begin
-        vAluno.slValores.Strings[1] := vPessoa.slValores.Strings[0];
-        vAluno.insert(vAluno.slValores);
+        {vAluno.slValores.Strings[1] := vPessoa.slValores.Strings[0];
+        vAluno.insert(vAluno.slValores); }
       end
     else
       begin
@@ -90,7 +90,7 @@ begin
       end;
 
   finally
-
+    FreeAndNil(vAluno);
   end;
 end;
 
@@ -103,8 +103,8 @@ begin
     //o valor 0 --> cadastrar (insert), o valor 1 --> alterar (update)
     if (vProfessor.estado = 1) then
       begin
-        vProfessor.slValores.Add('0');
-        vProfessor.slValores.Add(vPessoa.slValores.Strings[0]);
+        {vProfessor.slValores.Add('0');
+        vProfessor.slValores.Add(vPessoa.slValores.Strings[0]); }
       end
     else
       begin
@@ -115,7 +115,7 @@ begin
     vProfessor.insert(vProfessor.slValores);
 
   finally
-
+    FreeAndNil(vProfessor);
   end;
 end;
 

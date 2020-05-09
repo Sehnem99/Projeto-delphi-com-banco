@@ -211,7 +211,8 @@ begin
 
         //se estado for zero
         //carregar slValores  .Strings[0] := chave  (criar método que retorne a última chave gerada para a tabela
-        slDados.Strings[0] :=  getIdMaxTabela;
+        if (StrToInt(slDados.Strings[0]) = 0) then
+         slDados.Strings[0] :=  getIdMaxTabela;
        //Limpar a Query e passatr o insert na professor
      except
           on E:Exception do

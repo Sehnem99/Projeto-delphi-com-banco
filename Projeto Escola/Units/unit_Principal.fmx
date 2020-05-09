@@ -44,10 +44,18 @@ object form_Principal: Tform_Principal
       object mnMateria: TMenuItem
         Locked = True
         Text = 'Mat'#233'ria'
+        OnClick = mnMateriaClick
+      end
+      object MenuItem3: TMenuItem
+        Locked = True
+        Text = 'MenuItem3'
       end
     end
     object MenuItem2: TMenuItem
       Text = 'MenuItem2'
+    end
+    object MenuItem1: TMenuItem
+      Text = 'MenuItem1'
     end
   end
 end

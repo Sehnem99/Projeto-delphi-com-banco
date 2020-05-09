@@ -19,6 +19,8 @@ type
     procedure sbtnSalvarClick(Sender: TObject);
     procedure sbtnExcluirClick(Sender: TObject);
     procedure sbtnNovoClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +37,16 @@ uses Consulta;
 
 
 {$R *.fmx}
+
+procedure TForm_CadPeriodo.FormCreate(Sender: TObject);
+begin
+ vPeriodo := TPeriodo.Create('periodo');
+end;
+
+procedure TForm_CadPeriodo.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(vPeriodo);
+end;
 
 procedure TForm_CadPeriodo.sbtnBuscaClick(Sender: TObject);
 var

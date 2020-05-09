@@ -19,10 +19,13 @@ type
     ImageControl1: TImageControl;
     mnCadastroTurma: TMenuItem;
     mnMateria: TMenuItem;
+    MenuItem1: TMenuItem;
+    MenuItem3: TMenuItem;
     procedure mnPessoaClick(Sender: TObject);
     procedure mnCursoClick(Sender: TObject);
     procedure mnCadastroTurmaClick(Sender: TObject);
     procedure mnPeriodoClick(Sender: TObject);
+    procedure mnMateriaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,7 +39,8 @@ implementation
 
 {$R *.fmx}
 
-uses unit_BancoDados, unit_CadPessoal, unit_CadCurso, Unit_CadTurma, unit_CadPeriodo;
+uses unit_BancoDados, unit_CadPessoal, unit_CadCurso, Unit_CadTurma,
+     unit_CadPeriodo, Unit_CadMateria;
 
 procedure Tform_Principal.mnPeriodoClick(Sender: TObject);
 var
@@ -84,6 +88,18 @@ begin
     vForm_CadCurso.ShowModal;
   finally
     FreeAndNil(vForm_CadCurso);
+  end;
+end;
+
+procedure Tform_Principal.mnMateriaClick(Sender: TObject);
+var
+  vForm_CadMateria : TForm_CadMateria;
+begin
+  vForm_CadMateria :=  TForm_CadMateria.Create(Self);
+  try
+    vForm_CadMateria.ShowModal;
+  finally
+    FreeAndNil(vForm_CadMateria);
   end;
 end;
 

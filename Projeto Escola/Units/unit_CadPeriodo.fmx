@@ -7,6 +7,8 @@ object Form_CadPeriodo: TForm_CadPeriodo
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object sbtnNovo: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
