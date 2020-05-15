@@ -20,7 +20,8 @@ uses
   Unit_CadTurma in '..\Units\Unit_CadTurma.pas' {Form_CadTurma},
   Turma in '..\Classes\Turma.pas',
   Unit_CadMateria in '..\Units\Unit_CadMateria.pas' {Form_CadMateria},
-  Materia in '..\Classes\Materia.pas';
+  Materia in '..\Classes\Materia.pas',
+  Unit_CadTurmaAlunos in '..\Units\Unit_CadTurmaAlunos.pas' {Form_CadTurmaAlunos};
 
 {$R *.res}
 
@@ -30,5 +31,6 @@ begin
   Application.CreateForm(Tform_Principal, form_Principal);
   Application.CreateForm(TForm_CadTurma, Form_CadTurma);
   Application.CreateForm(TForm_CadMateria, Form_CadMateria);
+  Application.CreateForm(TForm_CadTurmaAlunos, Form_CadTurmaAlunos);
   Application.Run;
 end.

@@ -59,9 +59,14 @@ begin
 end;
 
 procedure Tform_CadPessoa.FormCreate(Sender: TObject);
+
 begin
    vPessoa := TPessoa.Create('pessoa');
    vPessoa.estado := 0;
+   vProfessor := TProfessor.Create('professor');
+   vProfessor.estado := 0;
+   vAluno := TAluno.Create('aluno');
+   vProfessor.estado := 0;
 end;
 
 procedure Tform_CadPessoa.FormDestroy(Sender: TObject);
@@ -73,7 +78,7 @@ end;
 
 procedure Tform_CadPessoa.setCadAluno(sEstado:Integer);
 begin
-  vAluno := TAluno.Create('aluno');
+
   vAluno.estado := sEstado;
   try
     //o valor 0 --> cadastrar (insert), o valor 1 --> alterar (update)
@@ -95,9 +100,7 @@ begin
 end;
 
 procedure Tform_CadPessoa.setCadProfessor(sEstado:Integer);
-
 begin
-  vProfessor := TProfessor.Create('professor');
   vProfessor.estado := sEstado;
   try
     //o valor 0 --> cadastrar (insert), o valor 1 --> alterar (update)
@@ -143,6 +146,17 @@ begin
                     dtDataNasc.Date := StrToDate(vPessoa.getCampoFromListaValores(3));
                     cbTipo.ItemIndex := StrToInt(vPessoa.getCampoFromListaValores(4));
                     vPessoa.estado := 1;
+
+                    if (StrToInt(vPessoa.slValores.Strings[4]) = 1) then
+                      begin
+                        vProfessor.slValores.Clear;
+                        vProfessor.slValores.Add(vPessoa.getCampoFromListaValores(0)) ;
+                      end
+                    else
+                      begin
+                        vAluno.slValores.Clear;
+                        vAluno.slValores.Add(vPessoa.getCampoFromListaValores(0));
+                      end;
                end
              else
                  begin
@@ -163,8 +177,16 @@ end;
 procedure Tform_CadPessoa.sbtnExcluirClick(Sender: TObject);
 begin
     if (vPessoa.getEstado = 0) then
-       exit;
-     vPessoa.delete;
+       exit
+    else
+      begin
+       if (StrToInt(vPessoa.slValores.Strings[4]) = 1) then
+         vProfessor.delete
+       else
+         vAluno.delete;
+
+       vPessoa.delete;
+      end;
      sbtnNovoClick(sbtnNovo);
 end;
 

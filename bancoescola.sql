@@ -11,9 +11,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-drop DATABASE IF EXISTS AcademicLifeSystem;
-CREATE SCHEMA IF NOT EXISTS AcademicLifeSystem DEFAULT CHARACTER SET utf8 ;
-USE AcademicLifeSystem;
+drop DATABASE IF EXISTS escola;
+CREATE SCHEMA IF NOT EXISTS escola DEFAULT CHARACTER SET utf8 ;
+USE escola;
 
 
 SET FOREIGN_KEY_CHECKS = 0;

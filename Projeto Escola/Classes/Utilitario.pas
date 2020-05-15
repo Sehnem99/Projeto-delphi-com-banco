@@ -144,10 +144,10 @@ begin
                 TComboBox(Temp.Components[i]).ItemIndex := 0
               else
               if (Temp.Components[i] is TImageControl) then
-                TComboBox(Temp.Components[i]).Images := nil
+                TImageControl(Temp.Components[i]).Bitmap := nil
               else
               if (Temp.Components[i] is TDateEdit) then
-                TComboBox(Temp.Components[i]).Data := Date;
+                TDateEdit(Temp.Components[i]).Data := Date;
          end;
 end;
 

@@ -1,0 +1,40 @@
+object Form_CadTurmaAlunos: TForm_CadTurmaAlunos
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object lbDsc: TLabel
+    Position.X = 137.000000000000000000
+    Position.Y = 26.000000000000000000
+    Size.Width = 40.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Truma'
+    TabOrder = 2
+  end
+  object edDsc: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Position.X = 192.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 153.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object sbtnBusca: TSpeedButton
+    Images = dm_BancoDados.ImageList1
+    ImageIndex = 1
+    Position.X = 366.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 37.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'actiontoolbutton'
+    Text = 'sbtnBusca'
+  end
+end

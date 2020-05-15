@@ -88,7 +88,6 @@ object form_CadPessoa: Tform_CadPessoa
         'Selecione o tipo'
         'Professor'
         'Aluno')
-      ItemIndex = 2
       Position.X = 241.000000000000000000
       Position.Y = 135.000000000000000000
       Size.Width = 162.000000000000000000
@@ -100,8 +99,8 @@ object form_CadPessoa: Tform_CadPessoa
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
       ImageIndex = 2
-      Position.X = 271.000000000000000000
-      Position.Y = 164.000000000000000000
+      Position.X = 247.000000000000000000
+      Position.Y = 172.000000000000000000
       Size.Width = 76.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
@@ -126,8 +125,8 @@ object form_CadPessoa: Tform_CadPessoa
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
       ImageIndex = 0
-      Position.X = 178.000000000000000000
-      Position.Y = 164.000000000000000000
+      Position.X = 154.000000000000000000
+      Position.Y = 172.000000000000000000
       Size.Width = 76.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
@@ -140,8 +139,8 @@ object form_CadPessoa: Tform_CadPessoa
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
       ImageIndex = 0
-      Position.X = 371.000000000000000000
-      Position.Y = 163.000000000000000000
+      Position.X = 347.000000000000000000
+      Position.Y = 171.000000000000000000
       Size.Width = 76.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False

@@ -41,6 +41,7 @@ var
 implementation
 
 {$R *.fmx}
+
 uses unit_BancoDados, Consulta;
 
 procedure TForm_CadTurma.FormCreate(Sender: TObject);

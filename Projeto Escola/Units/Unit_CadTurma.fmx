@@ -2,8 +2,8 @@ object Form_CadTurma: TForm_CadTurma
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 270
-  ClientWidth = 410
+  ClientHeight = 224
+  ClientWidth = 448
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -11,8 +11,8 @@ object Form_CadTurma: TForm_CadTurma
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object lbDsc: TLabel
-    Position.X = 57.000000000000000000
-    Position.Y = 34.000000000000000000
+    Position.X = 81.000000000000000000
+    Position.Y = 18.000000000000000000
     Size.Width = 57.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -22,8 +22,8 @@ object Form_CadTurma: TForm_CadTurma
   object edDsc: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 4
-    Position.X = 128.000000000000000000
-    Position.Y = 32.000000000000000000
+    Position.X = 152.000000000000000000
+    Position.Y = 16.000000000000000000
     Size.Width = 153.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -40,8 +40,8 @@ object Form_CadTurma: TForm_CadTurma
       '8'#186' Semestres'
       '9'#186' Semestres'
       '10'#186' Semestres')
-    Position.X = 128.000000000000000000
-    Position.Y = 104.000000000000000000
+    Position.X = 152.000000000000000000
+    Position.Y = 88.000000000000000000
     Size.Width = 153.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -49,22 +49,22 @@ object Form_CadTurma: TForm_CadTurma
   end
   object deInic: TDateEdit
     Date = 43959.000000000000000000
-    Position.X = 84.000000000000000000
-    Position.Y = 72.000000000000000000
+    Position.X = 108.000000000000000000
+    Position.Y = 56.000000000000000000
     TabOrder = 7
   end
   object deFim: TDateEdit
     Date = 43959.000000000000000000
-    Position.X = 255.000000000000000000
-    Position.Y = 72.000000000000000000
+    Position.X = 279.000000000000000000
+    Position.Y = 56.000000000000000000
     TabOrder = 6
   end
   object sbtnNovo: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 0
-    Position.X = 58.000000000000000000
-    Position.Y = 164.000000000000000000
+    Position.X = 74.000000000000000000
+    Position.Y = 140.000000000000000000
     Size.Width = 76.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -77,8 +77,8 @@ object Form_CadTurma: TForm_CadTurma
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 2
-    Position.X = 151.000000000000000000
-    Position.Y = 164.000000000000000000
+    Position.X = 167.000000000000000000
+    Position.Y = 140.000000000000000000
     Size.Width = 76.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -91,8 +91,8 @@ object Form_CadTurma: TForm_CadTurma
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 0
-    Position.X = 251.000000000000000000
-    Position.Y = 163.000000000000000000
+    Position.X = 267.000000000000000000
+    Position.Y = 139.000000000000000000
     Size.Width = 76.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -102,8 +102,8 @@ object Form_CadTurma: TForm_CadTurma
     OnClick = sbtnExcluirClick
   end
   object Label1: TLabel
-    Position.X = 198.000000000000000000
-    Position.Y = 74.000000000000000000
+    Position.X = 222.000000000000000000
+    Position.Y = 58.000000000000000000
     Size.Width = 57.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -111,8 +111,8 @@ object Form_CadTurma: TForm_CadTurma
     TabOrder = 1
   end
   object lbDtInic: TLabel
-    Position.X = 16.000000000000000000
-    Position.Y = 75.000000000000000000
+    Position.X = 40.000000000000000000
+    Position.Y = 59.000000000000000000
     Size.Width = 81.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -120,8 +120,8 @@ object Form_CadTurma: TForm_CadTurma
     TabOrder = 0
   end
   object Label2: TLabel
-    Position.X = 48.000000000000000000
-    Position.Y = 106.000000000000000000
+    Position.X = 72.000000000000000000
+    Position.Y = 90.000000000000000000
     Size.Width = 57.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -131,8 +131,8 @@ object Form_CadTurma: TForm_CadTurma
   object sbtnBusca: TSpeedButton
     Images = dm_BancoDados.ImageList1
     ImageIndex = 1
-    Position.X = 302.000000000000000000
-    Position.Y = 31.000000000000000000
+    Position.X = 326.000000000000000000
+    Position.Y = 15.000000000000000000
     Size.Width = 37.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False

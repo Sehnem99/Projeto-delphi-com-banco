@@ -2,62 +2,24 @@ object Form_CadCurso: TForm_CadCurso
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 235
-  ClientWidth = 588
+  ClientHeight = 507
+  ClientWidth = 608
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
-  object edNome: TEdit
-    Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 0
-    Position.X = 232.000000000000000000
-    Position.Y = 40.000000000000000000
-    Size.Width = 185.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-  end
-  object cbStatus: TComboBox
-    Items.Strings = (
-      'Ativo'
-      'Inativo')
-    Position.X = 232.000000000000000000
-    Position.Y = 96.000000000000000000
-    Size.Width = 185.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 1
-  end
-  object lbNome: TLabel
-    Position.X = 144.000000000000000000
-    Position.Y = 41.000000000000000000
-    Size.Width = 49.000000000000000000
-    Size.Height = 17.000000000000000000
-    Size.PlatformDefault = False
-    Text = 'Nome'
-    TabOrder = 2
-  end
-  object lbStatus: TLabel
-    Position.X = 147.000000000000000000
-    Position.Y = 94.000000000000000000
-    Size.Width = 49.000000000000000000
-    Size.Height = 17.000000000000000000
-    Size.PlatformDefault = False
-    Text = 'Status'
-    TabOrder = 3
-  end
   object sbtnNovo: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 0
-    Position.X = 130.000000000000000000
-    Position.Y = 164.000000000000000000
-    Size.Width = 76.000000000000000000
+    Position.X = 114.000000000000000000
+    Position.Y = 55.000000000000000000
+    Size.Width = 97.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Novo'
+    Text = 'Novo Curso'
     TextSettings.Font.Size = 14.000000000000000000
     TextSettings.HorzAlign = Leading
     OnClick = sbtnNovoClick
@@ -66,12 +28,12 @@ object Form_CadCurso: TForm_CadCurso
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 2
-    Position.X = 223.000000000000000000
-    Position.Y = 164.000000000000000000
-    Size.Width = 76.000000000000000000
+    Position.X = 234.000000000000000000
+    Position.Y = 55.000000000000000000
+    Size.Width = 115.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Salvar'
+    Text = 'Salvar Curso'
     TextSettings.Font.Size = 14.000000000000000000
     TextSettings.HorzAlign = Leading
     OnClick = sbtnSalvarClick
@@ -80,26 +42,107 @@ object Form_CadCurso: TForm_CadCurso
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 0
-    Position.X = 323.000000000000000000
-    Position.Y = 163.000000000000000000
-    Size.Width = 76.000000000000000000
+    Position.X = 365.000000000000000000
+    Position.Y = 54.000000000000000000
+    Size.Width = 102.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
-    Text = 'Excluir'
+    Text = 'Excluir Curso'
     TextSettings.Font.Size = 14.000000000000000000
     TextSettings.HorzAlign = Leading
     OnClick = sbtnExcluirClick
   end
-  object sbtnBusca: TSpeedButton
-    Images = dm_BancoDados.ImageList1
-    ImageIndex = 1
-    Position.X = 438.000000000000000000
-    Position.Y = 41.000000000000000000
-    Size.Width = 37.000000000000000000
-    Size.Height = 22.000000000000000000
+  object Panel1: TPanel
+    Position.X = 6.000000000000000000
+    Position.Y = 4.000000000000000000
+    Size.Width = 585.000000000000000000
+    Size.Height = 49.000000000000000000
     Size.PlatformDefault = False
-    StyleLookup = 'actiontoolbutton'
-    Text = 'sbtnBusca'
-    OnClick = sbtnBuscaClick
+    TabOrder = 0
+    object cbStatus: TComboBox
+      Items.Strings = (
+        'Ativo'
+        'Inativo')
+      Position.X = 322.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object edNome: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Position.X = 80.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lbNome: TLabel
+      Position.X = 14.000000000000000000
+      Position.Y = 11.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Nome'
+      TabOrder = 2
+    end
+    object lbStatus: TLabel
+      Position.X = 280.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 39.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Status'
+      TabOrder = 3
+    end
+    object sbtnBusca: TSpeedButton
+      Images = dm_BancoDados.ImageList1
+      ImageIndex = 1
+      Position.X = 526.000000000000000000
+      Position.Y = 9.000000000000000000
+      Size.Width = 37.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'actiontoolbutton'
+      Text = 'sbtnBusca'
+      OnClick = sbtnBuscaClick
+    end
+  end
+  object Panel2: TPanel
+    Position.X = 8.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 585.000000000000000000
+    Size.Height = 401.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object gridMaterias: TStringGrid
+      CanFocus = True
+      ClipChildren = True
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 569.000000000000000000
+      Size.Height = 305.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnCellDblClick = gridMateriasCellDblClick
+      Viewport.Width = 569.000000000000000000
+      Viewport.Height = 305.000000000000000000
+    end
+    object sbtnAdcExclMateria: TSpeedButton
+      StyledSettings = [Family, Style, FontColor]
+      Images = dm_BancoDados.ImageList1
+      ImageIndex = 2
+      Position.X = 192.000000000000000000
+      Position.Y = 335.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Adicionar/Excluir Materia'
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.HorzAlign = Leading
+      OnClick = sbtnAdcExclMateriaClick
+    end
   end
 end
