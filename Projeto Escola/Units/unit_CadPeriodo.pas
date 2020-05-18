@@ -40,7 +40,8 @@ uses Consulta;
 
 procedure TForm_CadPeriodo.FormCreate(Sender: TObject);
 begin
- vPeriodo := TPeriodo.Create('periodo');
+  vPeriodo := TPeriodo.Create('periodo');
+  vPeriodo.estado := 0;
 end;
 
 procedure TForm_CadPeriodo.FormDestroy(Sender: TObject);

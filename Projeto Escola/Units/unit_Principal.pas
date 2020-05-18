@@ -2,26 +2,49 @@ unit unit_Principal;
 
 interface
 
-uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.ListBox, FMX.Controls.Presentation, FMX.Layouts, FMX.DateTimeCtrls,
-  FMX.Edit, FMX.Menus;
+{$REGION 'Uses do Sistema'}
+uses System.SysUtils
+   , System.Types
+   , System.UITypes
+   , System.Classes
+   , System.Variants
+   , FMX.Types
+   , FMX.Controls
+   , FMX.Forms
+   , FMX.Graphics
+   , FMX.Dialogs
+   , FMX.StdCtrls
+   , FMX.ListBox
+   , FMX.Controls.Presentation
+   , FMX.Layouts
+   , FMX.DateTimeCtrls
+   , FMX.Edit
+   , FMX.Menus
+   , FMX.ExtCtrls
+   , FMX.Objects
+   ;
+{$ENDREGION}
 
 type
   Tform_Principal = class(TForm)
     MainMenu: TMainMenu;
     mnCadastro: TMenuItem;
-    mnPessoa: TMenuItem;
+    mnChamada: TMenuItem;
+    MenuItem3: TMenuItem;
     mnCurso: TMenuItem;
     mnPeriodo: TMenuItem;
-    ImageControl1: TImageControl;
-    mnCadastroTurma: TMenuItem;
-    procedure mnPessoaClick(Sender: TObject);
+    imgPrincipal: TImage;
+    mnTurma: TMenuItem;
+    mnMateria: TMenuItem;
+    mnContato: TMenuItem;
+    procedure MenuItem3Click(Sender: TObject);
     procedure mnCursoClick(Sender: TObject);
-    procedure mnCadastroTurmaClick(Sender: TObject);
     procedure mnPeriodoClick(Sender: TObject);
+    procedure mnChamadaClick(Sender: TObject);
+    procedure imgPrincipalClick(Sender: TObject);
+    procedure mnTurmaClick(Sender: TObject);
     procedure mnMateriaClick(Sender: TObject);
+    procedure mnContatoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,24 +58,24 @@ implementation
 
 {$R *.fmx}
 
-uses unit_BancoDados, unit_CadPessoal, unit_CadCurso, Unit_CadTurma,
-     unit_CadPeriodo, Unit_CadMateria;
+uses unit_BancoDados
+   , unit_CadCurso
+   , unit_CadTurma
+   , unit_CadPessoal
+   , unit_CadMateria
+   , unit_CadPeriodo
+   , unit_CadContato
+   , unit_Chamada
+   ;
 
-procedure Tform_Principal.mnPeriodoClick(Sender: TObject);
+procedure Tform_Principal.MenuItem3Click(Sender: TObject);
 var
-  vForm_CadPeriodo : TForm_CadPeriodo;
+  vForm_CadPessoa : TForm_CadPprocedure Tform_Principal.imgPrincipalClick(Sender: TObject);
 begin
-  vForm_CadPeriodo := TForm_CadPeriodo.Create(Self);
-  try
-    vForm_CadPeriodo.ShowModal;
-  finally
-    FreeAndNil(vForm_CadPeriodo);
-  end;
+
 end;
 
-procedure Tform_Principal.mnPessoaClick(Sender: TObject);
-var
-  vForm_CadPessoa : Tform_CadPessoa;
+essoa;
 begin
   vForm_CadPessoa := Tform_CadPessoa.Create(Self);
   try
@@ -62,17 +85,28 @@ begin
   end;
 end;
 
-procedure Tform_Principal.mnCadastroTurmaClick(Sender: TObject);
+procedure Tform_Principal.mnChamadaClick(Sender: TObject);
 var
-  vFrom_CadTurma : TForm_CadTurma;
+  vForm_Chamada : TForm_Chamada;
 begin
-  vFrom_CadTurma := TForm_CadTurma.Create(Self);
+  vForm_Chamada := TForm_Chamada.Create(Self);
   try
-    vFrom_CadTurma.ShowModal;
+    vForm_Chamada.ShowModal;
   finally
-    FreeAndNil(vFrom_CadTurma);
+    FreeAndNil(vForm_Chamada);
   end;
+end;
 
+procedure Tform_Principal.mnContatoClick(Sender: TObject);
+var
+  vForm_CadContato : Tform_CadContato;
+begin
+  vForm_CadContato := Tform_CadContato.Create(Self);
+  try
+    vForm_CadContato.ShowModal;
+  finally
+    FreeAndNil(vForm_CadContato);
+  end;
 end;
 
 procedure Tform_Principal.mnCursoClick(Sender: TObject);
@@ -89,13 +123,37 @@ end;
 
 procedure Tform_Principal.mnMateriaClick(Sender: TObject);
 var
-  vForm_CadMateria : TForm_CadMateria;
+  vForm_CadMateria : Tform_CadMateria;
 begin
-  vForm_CadMateria :=  TForm_CadMateria.Create(Self);
+  vForm_CadMateria := Tform_CadMateria.Create(Self);
   try
     vForm_CadMateria.ShowModal;
   finally
     FreeAndNil(vForm_CadMateria);
+  end;
+end;
+
+procedure Tform_Principal.mnPeriodoClick(Sender: TObject);
+var
+  vForm_CadPeriodo : Tform_CadPeriodo;
+begin
+  vForm_CadPeriodo := Tform_CadPeriodo.Create(Self);
+  try
+    vForm_CadPeriodo.ShowModal;
+  finally
+    FreeAndNil(vForm_CadPeriodo);
+  end;
+end;
+
+procedure Tform_Principal.mnTurmaClick(Sender: TObject);
+var
+  vForm_CadTurma : Tform_CadTurma;
+begin
+  vForm_CadTurma := Tform_CadTurma.Create(Self);
+  try
+    vForm_CadTurma.ShowModal;
+  finally
+    FreeAndNil(vForm_CadTurma);
   end;
 end;
 

@@ -1,14 +1,13 @@
-unit Professor;
+unit Contato;
 
 interface
 
 uses Cadastro;
 
-type TProfessor = class(TCadastro)
+type TContato = class(TCadastro)
    private
 
    public
-
 end;
 
 implementation

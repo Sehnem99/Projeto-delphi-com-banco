@@ -15,12 +15,15 @@ uses
   Curso in '..\Classes\Curso.pas',
   unit_CadCurso in '..\Units\unit_CadCurso.pas' {Form_CadCurso},
   unit_CadPeriodo in '..\Units\unit_CadPeriodo.pas' {Form_CadPeriodo},
-  Periodo in '..\Classes\Periodo.pas',
-  Professor in '..\Professor.pas',
-  Unit_CadTurma in '..\Units\Unit_CadTurma.pas' {Form_CadTurma},
+  Periodo in '..\Classes\Periodo.pas' {/  Professor in '..\Classes\Professor.pas';},
+  Professor in '..\Classes\Professor.pas',
+  unit_Chamada in '..\Units\unit_Chamada.pas' {frm_Chamada},
+  unit_CadTurma in '..\Units\unit_CadTurma.pas' {form_CadTurma},
   Turma in '..\Classes\Turma.pas',
-  Unit_CadMateria in '..\Units\Unit_CadMateria.pas' {Form_CadMateria},
-  Materia in '..\Classes\Materia.pas';
+  unit_CadMateria in '..\Units\unit_CadMateria.pas' {form_CadMateria},
+  Materia in '..\Classes\Materia.pas',
+  unit_CadContato in '..\Units\unit_CadContato.pas' {form_CadContato},
+  Contato in '..\Classes\Contato.pas';
 
 {$R *.res}
 
@@ -28,7 +31,7 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm_BancoDados, dm_BancoDados);
   Application.CreateForm(Tform_Principal, form_Principal);
-  Application.CreateForm(TForm_CadTurma, Form_CadTurma);
-  Application.CreateForm(TForm_CadMateria, Form_CadMateria);
+  Application.CreateForm(Tform_CadMateria, form_CadMateria);
+  Application.CreateForm(Tform_CadContato, form_CadContato);
   Application.Run;
 end.
