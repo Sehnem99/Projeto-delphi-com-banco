@@ -104,7 +104,7 @@ object form_CadPessoa: Tform_CadPessoa
     object sbtnSalvar: TSpeedButton
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 3
+      ImageIndex = 2
       Position.X = 346.000000000000000000
       Position.Y = 241.000000000000000000
       Size.Width = 63.000000000000000000
@@ -117,7 +117,7 @@ object form_CadPessoa: Tform_CadPessoa
     end
     object sbtnBusca: TSpeedButton
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 2
+      ImageIndex = 1
       Position.X = 491.000000000000000000
       Position.Y = 53.000000000000000000
       Size.Width = 35.000000000000000000
@@ -130,7 +130,7 @@ object form_CadPessoa: Tform_CadPessoa
     object sbtnNovo: TSpeedButton
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 4
+      ImageIndex = 0
       Position.X = 268.000000000000000000
       Position.Y = 241.000000000000000000
       Size.Width = 57.000000000000000000
@@ -144,7 +144,7 @@ object form_CadPessoa: Tform_CadPessoa
     object sbtnExcluir: TSpeedButton
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 1
+      ImageIndex = 0
       Position.X = 431.000000000000000000
       Position.Y = 241.000000000000000000
       Size.Width = 66.000000000000000000

@@ -41,7 +41,6 @@ type
     procedure mnCursoClick(Sender: TObject);
     procedure mnPeriodoClick(Sender: TObject);
     procedure mnChamadaClick(Sender: TObject);
-    procedure imgPrincipalClick(Sender: TObject);
     procedure mnTurmaClick(Sender: TObject);
     procedure mnMateriaClick(Sender: TObject);
     procedure mnContatoClick(Sender: TObject);
@@ -70,12 +69,7 @@ uses unit_BancoDados
 
 procedure Tform_Principal.MenuItem3Click(Sender: TObject);
 var
-  vForm_CadPessoa : TForm_CadPprocedure Tform_Principal.imgPrincipalClick(Sender: TObject);
-begin
-
-end;
-
-essoa;
+  vForm_CadPessoa : TForm_CadPessoa;
 begin
   vForm_CadPessoa := Tform_CadPessoa.Create(Self);
   try

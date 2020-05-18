@@ -136,7 +136,10 @@ end;
 
 procedure Tform_CadPessoa.setCadAluno(sEstado:Integer);
 begin
-  vAluno := TAluno.Create('aluno');
+  vAluno        := TAluno.Create('aluno');
+  vTurma        := TTurma.Create('turma');
+  vCurso        := TCurso.Create('curso');
+  vAluno_Turma  := TAluno_Turma.Create('aluno_turma');
   vAluno.estado := sEstado;
   try
     //Estado = 0 - Inserir
@@ -154,10 +157,19 @@ begin
           vAluno.slValores.Add('0');
           vAluno.slValores.Add(vPessoa.slValores.Strings[0]);
           vAluno.insert(vAluno.slValores);
+
+          vAluno_Turma.slValores.Add('0');
+          vAluno_Turma.slValores.Add(vAluno.getCampoFromListaValores(StrToInt(vAluno.getIdMaxTabela)));
+          vAluno_Turma.slValores.Add(IntToStr(cbTurma.ItemIndex));
+          vAluno_Turma.slValores.Add(IntToStr(cbCurso.ItemIndex));
+          vAluno_Turma.insert(vAluno_Turma.slValores);
         end;
 
   finally
     FreeAndNil(vAluno);
+    FreeAndNil(vTurma);
+    FreeAndNil(vCurso);
+    FreeAndNil(vAluno_Turma);
   end;
 end;
 
@@ -267,17 +279,7 @@ begin
       setCadProfessor(vPessoa.getEstado)
   else
       begin
-        vTurma       := TTurma.Create('turma');
-        vCurso       := TCurso.Create('curso');
-        vAluno_Turma := TAluno_Turma.Create('aluno_turma');
-
         setCadAluno(vPessoa.getEstado);
-
-        vAluno_Turma.slValores.Add('0');
-        vAluno_Turma.slValores.Add(vAluno.slValores(FCadastro.getIdMaxTabela));
-        vAluno_Turma.slValores.Add(IntToStr(cbTurma.ItemIndex));
-        vAluno_Turma.slValores.Add(IntToStr(cbCurso.ItemIndex));
-        // Implementar para inserir em aluno_turma
       end;
 
   vPessoa.utilitario.LimpaTela(self);
