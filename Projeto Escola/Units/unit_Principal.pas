@@ -12,15 +12,11 @@ type
   Tform_Principal = class(TForm)
     MainMenu: TMainMenu;
     mnCadastro: TMenuItem;
-    MenuItem2: TMenuItem;
     mnPessoa: TMenuItem;
     mnCurso: TMenuItem;
     mnPeriodo: TMenuItem;
     ImageControl1: TImageControl;
     mnCadastroTurma: TMenuItem;
-    mnMateria: TMenuItem;
-    MenuItem1: TMenuItem;
-    MenuItem3: TMenuItem;
     procedure mnPessoaClick(Sender: TObject);
     procedure mnCursoClick(Sender: TObject);
     procedure mnCadastroTurmaClick(Sender: TObject);

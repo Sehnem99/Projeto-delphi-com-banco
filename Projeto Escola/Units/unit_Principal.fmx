@@ -1,7 +1,7 @@
 object form_Principal: Tform_Principal
   Left = 0
   Top = 0
-  Caption = 'Projeto de escola'
+  Caption = 'Bem Vindo !!!'
   ClientHeight = 521
   ClientWidth = 725
   Position = MainFormCenter
@@ -41,21 +41,6 @@ object form_Principal: Tform_Principal
         Text = 'Turma'
         OnClick = mnCadastroTurmaClick
       end
-      object mnMateria: TMenuItem
-        Locked = True
-        Text = 'Mat'#233'ria'
-        OnClick = mnMateriaClick
-      end
-      object MenuItem3: TMenuItem
-        Locked = True
-        Text = 'MenuItem3'
-      end
-    end
-    object MenuItem2: TMenuItem
-      Text = 'MenuItem2'
-    end
-    object MenuItem1: TMenuItem
-      Text = 'MenuItem1'
     end
   end
 end

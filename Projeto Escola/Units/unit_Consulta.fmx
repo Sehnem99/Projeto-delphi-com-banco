@@ -21,8 +21,8 @@ object frm_Consulta: Tfrm_Consulta
     Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick, AutoDisplacement]
     OnHeaderClick = sgConsultaHeaderClick
     OnCellDblClick = sgConsultaCellDblClick
-    Viewport.Width = 625.000000000000000000
-    Viewport.Height = 348.000000000000000000
+    Viewport.Width = 629.000000000000000000
+    Viewport.Height = 373.000000000000000000
   end
   object Panel1: TPanel
     Align = Top

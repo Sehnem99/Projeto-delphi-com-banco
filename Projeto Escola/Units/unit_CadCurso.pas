@@ -29,13 +29,19 @@ type
     procedure sbtnSalvarClick(Sender: TObject);
     procedure sbtnExcluirClick(Sender: TObject);
     procedure sbtnAdcExclMateriaClick(Sender: TObject);
-    procedure gridMateriasCellDblClick(const Column: TColumn;
-      const Row: Integer);
 
   private
     { Private declarations }
-    FIDCurso : Integer;
-    procedure CaregaStringGrid(vCodMateria: Integer);
+    FID_Curso: Integer;
+    retorno: string;
+    colunaRetorno:integer;
+    iColPesq :Integer;
+    procedure CaregaStringGrid(vCodCurso: Integer);
+    procedure setRetorno(retorno:string);
+    function getcolunaRetorno: integer;
+    procedure setiColPesq(iColPesq:integer);
+    function getiColPesq:integer;
+
   public
     { Public declarations }
   end;
@@ -51,26 +57,24 @@ Uses Consulta, Unit_CadMateria;
 
 {$R *.fmx}
 
-procedure TForm_CadCurso.CaregaStringGrid(vCodMateria: Integer);
+procedure TForm_CadCurso.CaregaStringGrid(vCodCurso: Integer);
 var
   vConsulta : TConsulta;
 begin
   vConsulta := TConsulta.create;
   try
+    gridMaterias.ClearColumns;
     vConsulta.setTextosql('SELECT A.ID_MATERIA  ''CODIGO'','#13+
-                          '       B.NOME,      ''NOME'''#13+
-                          '       C.PERIODO    ''PERIODO'''#13+
-                          'FROM escola.curso_materia a, escola.materia b,'#13+
-                          '     escola.periodo C              '#13+
+                          '       B.NOME      ''NOME'','#13+
+                          '       C.PERIODO    ''PERIODO'' '#13+
+                          'FROM curso_materia a, materia b,'#13+
+                          '     periodo C              '#13+
                           'WHERE A.ID_MATERIA = B.ID_MATERIA  '#13+
                           'AND B.ID_PERIODO = C.ID_PERIODO    '#13+
-                          'AND a.ID_CURSO =    ' );
+                          'AND a.ID_CURSO = ' + Format('%s', [vCurso.getCampoFromListaValores(0)]));
+
     vConsulta.getConsultaToSg(gridMaterias);
     vUtilitario.ajustaTamnhosg(gridMaterias);
-
-
-
-
   finally
     FreeAndNil(vConsulta);
   end;
@@ -80,7 +84,6 @@ procedure TForm_CadCurso.FormCreate(Sender: TObject);
 begin
   vCurso := TCurso.Create('curso');
   vCurso.estado := 0;
-  FIDCurso := 0;
 end;
 
 procedure TForm_CadCurso.FormDestroy(Sender: TObject);
@@ -88,25 +91,36 @@ begin
   FreeAndNil(vCurso);
 end;
 
-procedure TForm_CadCurso.gridMateriasCellDblClick(const Column: TColumn;
-  const Row: Integer);
+function TForm_CadCurso.getcolunaRetorno: integer;
 begin
-  //verifica id
-  //caso tenh id, Pegar o id da materia selecionada e jogar para tela
+ result := self.colunaRetorno;
+end;
 
-
+function TForm_CadCurso.getiColPesq: integer;
+begin
+  result := self.iColPesq;
 end;
 
 procedure TForm_CadCurso.sbtnAdcExclMateriaClick(Sender: TObject);
 var
   vForm_CadMateria : TForm_CadMateria;
 begin
-  vForm_CadMateria :=  TForm_CadMateria.Create(Self);
-  try
-    vForm_CadMateria.ShowModal;
-  finally
-    FreeAndNil(vForm_CadMateria);
-  end;
+  if (StrToInt(vCurso.getCampoFromListaValores(0)) <> 0) then
+    begin
+      vForm_CadMateria :=  TForm_CadMateria.Create(Self);
+      try
+        vForm_CadMateria.PID_Curso := StrToInt(vCurso.getCampoFromListaValores(0));
+        vForm_CadMateria.ShowModal;
+      finally
+        FreeAndNil(vForm_CadMateria);
+      end;
+    end
+  else
+    begin
+      ShowMessage('Antes de inserir ou alterar alguma materia voce deve cadastrar ou'+
+                  'selecionar algum curso');
+    end;
+   CaregaStringGrid(StrToInt(vCurso.getCampoFromListaValores(0)));
 end;
 
 procedure TForm_CadCurso.sbtnBuscaClick(Sender: TObject);
@@ -128,28 +142,71 @@ begin
              if (vCurso.isExiteSlvalores) then
                begin
                     edNome.Text := vCurso.getCampoFromListaValores(1);
-                    cbStatus.Index := StrToInt(vCurso.getCampoFromListaValores(2));
+                    cbStatus.ItemIndex := StrToInt(vCurso.getCampoFromListaValores(2));
                     vCurso.estado := 1;
+
+                    vConsulta.setTextosql('select * '+#13+
+                                          '  from curso_materia'+#13+
+                                          ' where id_curso = '+
+                                          Format('%s', [vCurso.getCampoFromListaValores(0)]));
+
+                     vCadCurso_Materia.slCampos.Add('ID_CURSO_MATERIA');
+                     vCadCurso_Materia.slCampos.Add('ID_CURSO');
+                     vCadCurso_Materia.slCampos.Add('ID_MATERIA');
+                     vCadCurso_Materia.slValores := vConsulta.getConsultaDados(vCadCurso_Materia.slCampos);
+
+
                end
              else
                  begin
                       vCurso.estado := 0;
                       edNome.Text := '';
-                      cbStatus.Index := 0;
+                      cbStatus.ItemIndex := -1;
                  end;
        end;
-
+     CaregaStringGrid(StrToInt(vCurso.getCampoFromListaValores(0)));
   finally
     FreeAndNil(vConsulta);
   end;
 end;
 
 procedure TForm_CadCurso.sbtnExcluirClick(Sender: TObject);
+var
+  vConsulta : TConsulta;
+  fExisteMateriaCadastrada : Boolean;
 begin
   if (vCurso.getEstado = 0) then
-    exit;
-  vCurso.delete;
-  sbtnNovoClick(sbtnNovo);
+    exit
+  else
+    begin
+      vConsulta := TConsulta.create;
+
+      try
+        vConsulta.setTextosql('select *'+
+                              '   from curso_materia a'+
+                              '  where a.ID_CURSO = '+
+                              Format('%s', [vCurso.getCampoFromListaValores(0)]) );
+        vCadCurso_Materia.slCampos.Add('ID_CURSO_MATERIA');
+        vCadCurso_Materia.slCampos.Add('ID_CURSO');
+        vCadCurso_Materia.slCampos.Add('ID_MATERIA');
+
+        vConsulta.getConsultaDados(vCadCurso_Materia.slCampos);
+        fExisteMateriaCadastrada := vConsulta.getfTemRegistroConsulta;
+
+        if (not fExisteMateriaCadastrada) then
+          begin
+            vCurso.delete;
+            vCurso.utilitario.LimpaTela(self);
+            edNome.SetFocus;
+          end
+        else
+          ShowMessage('Ante de excluir o curso, devese excluir todas as'+
+                      ' Matérias deste curso');
+                            
+      finally
+        FreeAndNil(vConsulta);
+      end;
+    end;
 end;
 
 procedure TForm_CadCurso.sbtnNovoClick(Sender: TObject);
@@ -164,19 +221,31 @@ begin
  if (vCurso.getEstado = 1) then
    begin
      vCurso.slValores.Strings[1] := edNome.Text;
-     vCurso.slValores.Strings[2] := IntToStr(cbStatus.ItemIndex);
+     vCurso.slValores.Strings[2] := IntToStr(cbStatus.ItemIndex) ;
    end
  else
    begin
      vCurso.slValores.Clear;
      vCurso.slValores.Add('0');
      vCurso.slValores.Add(edNome.Text);
-     vCurso.slValores.Add(IntToStr(cbStatus.ItemIndex));
+     vCurso.slValores.Add(IntToStr(cbStatus.ItemIndex + 1));
    end;
 
  vCurso.insert(vCurso.slValores);
+ CaregaStringGrid(StrToInt(vCurso.getCampoFromListaValores(0)));
  vCurso.utilitario.LimpaTela(self);
  edNome.SetFocus;
 end;
+
+procedure TForm_CadCurso.setiColPesq(iColPesq: integer);
+begin
+   self.iColPesq := iColPesq;
+end;
+
+procedure TForm_CadCurso.setRetorno(retorno: string);
+begin
+      self.retorno := retorno;
+end;
+
 
 end.

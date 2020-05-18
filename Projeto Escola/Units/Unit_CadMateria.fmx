@@ -1,7 +1,7 @@
 object Form_CadMateria: TForm_CadMateria
   Left = 128
   Top = 192
-  Caption = 'Form1'
+  Caption = 'Cadastro de Materia'
   ClientHeight = 200
   ClientWidth = 451
   Position = Designed
@@ -10,6 +10,7 @@ object Form_CadMateria: TForm_CadMateria
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   Left = 128
   Top = 192
   DesignerMasterStyle = 0

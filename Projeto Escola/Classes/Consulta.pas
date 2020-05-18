@@ -30,8 +30,9 @@ type TConsulta = class
         procedure getConsultaToSg(var sgConsulta:TStringGrid);
         procedure setcolunaRetorno(colunaRetorno:integer);
         function getcolunaRetorno:integer;
-        function getConsultaID(sTable, sIDprocurado :String): Integer;
         function getCarregaCB(vCombo: TComboBox;vField: String): TStringList;
+        function getConsultaDados(slCampos:TStringList): TStringList;
+        function getfTemRegistroConsulta: Boolean;
 
 end;
 
@@ -104,6 +105,11 @@ begin
      FreeAndNil(qrConsulta);
 end;
 
+function TConsulta.getfTemRegistroConsulta: Boolean;
+begin
+  Result := Self.fTemRegistroConsulta;
+end;
+
 function TConsulta.getCarregaCB(vCombo: TComboBox;vField: String): TStringList;
 var
    qrConsulta: TFDQuery;
@@ -164,7 +170,7 @@ begin
            if (self.getcolunaRetorno < 0) then //-1 --> retorna coluna selecionada
              self.setRetorno(frm_Consulta.sgConsulta.Cells[frm_Consulta.sgConsulta.Col, frm_Consulta.sgConsulta.Row])
            else
-               self.setRetorno(frm_Consulta.sgConsulta.Cells[self.getcolunaRetorno, frm_Consulta.sgConsulta.Row]);
+             self.setRetorno(frm_Consulta.sgConsulta.Cells[self.getcolunaRetorno, frm_Consulta.sgConsulta.Row]);
        end
      else
          self.setRetorno('');
@@ -172,20 +178,37 @@ begin
      FreeAndNil(frm_Consulta);
 end;
 
-function TConsulta.getConsultaID(sTable, sIDprocurado: String): Integer;
+function TConsulta.getConsultaDados(slCampos: TStringList): TStringList;
 var
-  qrConsulta: TFDQuery;
+   qrConsulta: TFDQuery;
+   i:integer;
+   slValores : TStringList;
 begin
-  qrConsulta := TFDQuery.Create(nil);
-  qrConsulta.Connection := dm_BancoDados.FDEscola;
-  qrConsulta.Close;
-  qrConsulta.SQL.Clear;
-  try
+     qrConsulta := TFDQuery.Create(nil);
+     i := 0;
+     slValores := TStringList.Create;
+     qrConsulta.Connection := dm_BancoDados.FDEscola;
+     qrConsulta.Close;
+     qrConsulta.SQL.Clear;
+     qrConsulta.SQL.Add(self.getTextosql);
 
-  finally
-
-  end;
-
+     try
+       qrConsulta.Open;
+       if (not qrConsulta.IsEmpty) then
+        begin
+          fTemRegistroConsulta := true;
+          for i := 0 to qrConsulta.FieldCount - 1 do
+            begin
+             slValores.Add( qrConsulta.FieldByName(slCampos[i]).AsString );
+             qrConsulta.Next;
+            end;
+        end
+       else
+         fTemRegistroConsulta := False;
+     finally
+       Result := slValores;
+       FreeAndNil(qrConsulta);
+     end;
 end;
 
 function TConsulta.getRetorno: string;

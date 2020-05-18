@@ -9,6 +9,13 @@ type TCurso = class(TCadastro)
 
 end;
 
+ TCurso_Materia = class (TCadastro)
+   private
+
+   public
+
+ end;
+
 implementation
 
 end.

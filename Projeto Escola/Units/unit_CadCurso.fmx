@@ -1,7 +1,7 @@
 object Form_CadCurso: TForm_CadCurso
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Cadastro de Curso'
   ClientHeight = 507
   ClientWidth = 608
   FormFactor.Width = 320
@@ -61,8 +61,9 @@ object Form_CadCurso: TForm_CadCurso
     TabOrder = 0
     object cbStatus: TComboBox
       Items.Strings = (
+        'Inativo'
         'Ativo'
-        'Inativo')
+        '')
       Position.X = 322.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 185.000000000000000000
@@ -126,9 +127,9 @@ object Form_CadCurso: TForm_CadCurso
       Size.Height = 305.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
-      OnCellDblClick = gridMateriasCellDblClick
-      Viewport.Width = 569.000000000000000000
-      Viewport.Height = 305.000000000000000000
+      Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
+      Viewport.Width = 565.000000000000000000
+      Viewport.Height = 280.000000000000000000
     end
     object sbtnAdcExclMateria: TSpeedButton
       StyledSettings = [Family, Style, FontColor]

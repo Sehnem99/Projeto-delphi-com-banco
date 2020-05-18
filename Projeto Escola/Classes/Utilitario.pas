@@ -141,7 +141,7 @@ begin
                 TMemo(Temp.Components[i]).Text := ''
               else
               if (Temp.Components[i] is TComboBox) then
-                TComboBox(Temp.Components[i]).ItemIndex := 0
+                TComboBox(Temp.Components[i]).ItemIndex := -1
               else
               if (Temp.Components[i] is TImageControl) then
                 TImageControl(Temp.Components[i]).Bitmap := nil
