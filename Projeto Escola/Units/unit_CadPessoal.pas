@@ -23,7 +23,7 @@ uses System.SysUtils
    , Aluno
    , Turma
    , Curso
-   , Cadastro
+   , Cadastro, Data.DB, Datasnap.DBClient
    ;
 {$ENDREGION}
 
@@ -60,10 +60,17 @@ type
     procedure cbTipoChange(Sender: TObject);
   private
     { Private declarations }
+
   public
     { Public declarations }
     procedure setCadAluno(sEstado:Integer);
+    procedure setCadAlunoTurma();
+    procedure setCadAlunoTurmaMateria();
     procedure setCadProfessor(sEstado:Integer);
+    procedure getCadAluno(pIdPessoa:String);
+    procedure getCadAlunoTurma(pIdAluno:String);
+    procedure getCadAlunoTurmaMateria(pIdAlunoTurma:String);
+    procedure getCadProfessor(pIdCadPessoa:String);
     procedure habilitaTurmaCurso(ativo:Boolean);
   end;
 
@@ -75,6 +82,7 @@ var
   vTurma         : TTurma;
   vCurso         : TCurso;
   vAluno_Turma   : TAluno_Turma;
+  vAluno_Turma_Materia : TAluno_Turma_Materia;
   FCadastro      : TCadastro;
 
 implementation
@@ -99,10 +107,15 @@ end;
 procedure Tform_CadPessoa.FormCreate(Sender: TObject);
 var
   vConsulta : TConsulta;
-
 begin
   vPessoa := TPessoa.Create('pessoa');
+  vAluno       := TAluno.Create('aluno');
+  vAluno_Turma := TAluno_Turma.Create('aluno_turma');
+  vAluno_Turma_Materia := TAluno_Turma_Materia.Create('aluno_turma_materia');
   vPessoa.estado := 0;
+  vAluno.estado  := 0;
+  vAluno_Turma.estado := 0;
+  vAluno_Turma_Materia.estado := 0;
 
   vConsulta := TConsulta.create;
   try
@@ -123,34 +136,116 @@ begin
   FreeAndNil(vPessoa);
   FreeAndNil(vTurma);
   FreeAndNil(vCurso);
+  FreeAndNil(vAluno);
   FreeAndNil(vAluno_Turma);
+  FreeAndNil(vAluno_Turma_Materia)
+end;
+
+procedure TForm_CadPessoa.getCadAluno(pIdPessoa: String);
+var
+  vConsulta : TConsulta;
+begin
+  vConsulta := TConsulta.create;
+  try
+    vConsulta.setTextosql('select * '+#13+
+                          '  from Aluno'+#13+
+                          ' where id_pessoa = '+
+                          Format('%s', [pIdPessoa]));
+
+    vAluno.slCampos.Add('ID_ALUNO');
+    vAluno.slCampos.Add('ID_PESSOA');
+    vAluno.slValores := vConsulta.getConsultaDados(vAluno.slCampos);
+
+    getCadAlunoTurma(vAluno.getCampoFromListaValores(0));
+
+  finally
+    FreeAndNil(vConsulta);
+  end;
+
+end;
+
+procedure TForm_CadPessoa.getCadAlunoTurma(pIdAluno: String);
+var
+  vConsulta : TConsulta;
+begin
+  vConsulta := TConsulta.create;
+  try
+    vConsulta.setTextosql('select * '+#13+
+                          '  from aluno_turma'+#13+
+                          ' where id_aluno = '+
+                          Format('%s', [pIdAluno]));
+
+    vAluno_Turma.slCampos.Add('ID_ALUNO_TURMA');
+    vAluno_Turma.slCampos.Add('ID_ALUNO');
+    vAluno_Turma.slCampos.Add('ID_TURMA');
+    vAluno_Turma.slCampos.Add('ID_CURSO');
+    vAluno.slValores := vConsulta.getConsultaDados(vAluno_Turma.slCampos);
+
+    getCadAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(0));
+  finally
+    FreeAndNil(vConsulta);
+  end;
+end;
+
+procedure TForm_CadPessoa.getCadAlunoTurmaMateria(pIdAlunoTurma: String);
+var
+  vConsulta : TConsulta;
+begin
+  vConsulta := TConsulta.create;
+  try
+    vConsulta.setTextosql('select * '+#13+
+                          '  from aluno_turma'+#13+
+                          ' where id_aluno = '+
+                          Format('%s', [pIdAlunoTurma]));
+
+    vAluno_Turma_Materia.slCampos.Add('ID_TURMA_MATERIA');
+    vAluno_Turma_Materia.slCampos.Add('ID_ALUNO_TURMA');
+    vAluno_Turma_Materia.slCampos.Add('ID_MATERIA');
+    vAluno.slValores := vConsulta.getConsultaDados(vAluno_Turma_Materia.slCampos);
+  finally
+    FreeAndNil(vConsulta);
+  end;
+end;
+
+procedure TForm_CadPessoa.getCadProfessor(pIdCadPessoa: String);
+var
+  vConsulta : TConsulta;
+begin
+  vConsulta := TConsulta.create;
+  try
+    vConsulta.setTextosql('select * '+#13+
+                          '  from professor'+#13+
+                          ' where id_professor = '+
+                          Format('%s', [pIdCadPessoa]));
+
+    vProfessor.slCampos.Add('ID_PROFESSOR');
+    vProfessor.slCampos.Add('ID_PESSOA');
+    vProfessor.slValores := vConsulta.getConsultaDados(vProfessor.slCampos);
+
+  finally
+    FreeAndNil(vConsulta);
+  end;
 end;
 
 procedure Tform_CadPessoa.habilitaTurmaCurso(ativo:Boolean);
 begin
   lbCurso.Visible := not ativo;
-  lbTurma.Visible   := not ativo;
-  cbTurma.Visible   := not ativo;
+  lbTurma.Visible := not ativo;
+  cbTurma.Visible := not ativo;
   cbCurso.Visible := not ativo;
 end;
 
 procedure Tform_CadPessoa.setCadAluno(sEstado:Integer);
 begin
-  vAluno        := TAluno.Create('aluno');
-  vTurma        := TTurma.Create('turma');
-  vCurso        := TCurso.Create('curso');
-  vAluno_Turma  := TAluno_Turma.Create('aluno_turma');
   vAluno.estado := sEstado;
+  vAluno_Turma_Materia.Estado := sEstado;
   try
     //Estado = 0 - Inserir
     //Estado = 1 - Atualizar
     if (vAluno.estado = 1) then
         begin
-          //Se existir, atualizar.
-
-          //vAluno.slValores.Add(vPessoa.getCampoFromListaValores(0));
-          //vAluno.slValores.Add(vPessoa.slValores.Strings[0]);
-          //vAluno.insert(vAluno.slValores);
+         vAluno_Turma_Materia.delete;
+         vAluno_Turma.delete;
         end
     else
         begin
@@ -159,17 +254,20 @@ begin
           vAluno.insert(vAluno.slValores);
 
           vAluno_Turma.slValores.Add('0');
-          vAluno_Turma.slValores.Add(vAluno.getCampoFromListaValores(StrToInt(vAluno.getIdMaxTabela)));
+          vAluno_Turma.slValores.Add(vAluno.getCampoFromListaValores(0));
           vAluno_Turma.slValores.Add(IntToStr(cbTurma.ItemIndex));
           vAluno_Turma.slValores.Add(IntToStr(cbCurso.ItemIndex));
           vAluno_Turma.insert(vAluno_Turma.slValores);
+
+          vAluno_Turma_Materia.slValores.Add('0');
+          vAluno_Turma_Materia.slValores.Add(vAluno_Turma.getCampoFromListaValores(0));
+          vAluno_Turma_Materia.slValores.Add('0');
+          vAluno_Turma_Materia.insertAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(3),vAluno_Turma_Materia.slValores);
         end;
 
   finally
-    FreeAndNil(vAluno);
-    FreeAndNil(vTurma);
-    FreeAndNil(vCurso);
-    FreeAndNil(vAluno_Turma);
+
+
   end;
 end;
 
@@ -181,20 +279,15 @@ begin
   try
     //Estado = 0 - Inserir
     //Estado = 1 - Atualizar
-    if (vProfessor.estado = 1) then
-        begin
-          //Se existir, atualizar.
-        end
-    else
-        begin
-          vProfessor.slValores.Add('0');
-          vProfessor.slValores.Add(vPessoa.slValores.Strings[0]);
-      end;
-
+    if (vProfessor.estado = 0) then
+     begin
+       vProfessor.slValores.Add('0');
+       vProfessor.slValores.Add(vPessoa.slValores.Strings[0]);
+     end;
     vProfessor.insert(vProfessor.slValores);
 
   finally
-    FreeAndNil(vProfessor);
+
   end;
 end;
 
@@ -221,7 +314,18 @@ begin
                   edCpf.Text       := vPessoa.getCampoFromListaValores(2);
                   dtDataNasc.Date  := StrToDate(vPessoa.getCampoFromListaValores(3));
                   cbTipo.ItemIndex := StrToInt(vPessoa.getCampoFromListaValores(4));
+                  if (cbTipo.ItemIndex = 1) then
+                    begin
+                      getCadProfessor(vPessoa.getCampoFromListaValores(0));
+                    end
+                  else
+                    begin
+                      getCadAluno(vPessoa.getCampoFromListaValores(0));
+                    end;
+
                   vPessoa.estado   := 1;
+
+
                 end
              else
                 begin
@@ -242,8 +346,13 @@ end;
 procedure Tform_CadPessoa.sbtnExcluirClick(Sender: TObject);
 begin
   if (vPessoa.getEstado = 0) then
-      exit;
-  vPessoa.delete;
+      exit
+  else
+    begin
+      vPessoa.slValores.Strings[4] := 0;
+      vPessoa.insert(vPessoa.slValores);
+    end;
+
   sbtnNovoClick(sbtnNovo);
 end;
 
@@ -258,10 +367,10 @@ procedure Tform_CadPessoa.sbtnSalvarClick(Sender: TObject);
 begin
   if (vPessoa.getEstado = 1) then
       begin
-        vPessoa.slValores.Strings[0] := edNome.Text;
-        vPessoa.slValores.Strings[1] := edCpf.Text;
-        vPessoa.slValores.Strings[2] := DateToStr(dtDataNasc.Date);
-        vPessoa.slValores.Strings[3] := IntToStr(cbTipo.ItemIndex);
+        vPessoa.slValores.Strings[1] := edNome.Text;
+        vPessoa.slValores.Strings[2] := edCpf.Text;
+        vPessoa.slValores.Strings[3] := DateToStr(dtDataNasc.Date);
+        vPessoa.slValores.Strings[4] := IntToStr(cbTipo.ItemIndex);
       end
   else
       begin

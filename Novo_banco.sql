@@ -11,9 +11,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-drop DATABASE IF EXISTS escola;
-CREATE SCHEMA IF NOT EXISTS escola DEFAULT CHARACTER SET utf8 ;
-USE escola;
+drop DATABASE IF EXISTS escola_teste;
+CREATE SCHEMA IF NOT EXISTS escola_teste DEFAULT CHARACTER SET utf8 ;
+USE escola_teste;
 
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -31,9 +31,16 @@ CREATE TABLE IF NOT EXISTS PESSOA (
   PRIMARY KEY (ID_PESSOA))
 ENGINE = InnoDB;
 
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (1, 'Ginny', '458143853589', '2019-10-01', 1);
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (2, 'Russ',  '458153960015', '2019-09-03', 2);
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (3, 'Winnah','458469761211', '2020-03-10', 1);
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (4, 'Buckie','458691088072', '2019-10-12', 2);
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (5, 'Haily', '458200520274', '2020-02-15', 1);
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (6, 'Mickey','458708020936', '2019-07-28', 2);
+insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (7, 'Fania', '458533853774', '2019-09-02', 1);
 
 -- -----------------------------------------------------
--- Table ALUNO
+-- Table ALUNO Tipo 2 
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS ALUNO (
   ID_ALUNO INT NOT NULL AUTO_INCREMENT,
@@ -45,9 +52,12 @@ CREATE TABLE IF NOT EXISTS ALUNO (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+insert into aluno (id_aluno, id_pessoa) values (1, 2);
+insert into aluno (id_aluno, id_pessoa) values (2, 4);
+insert into aluno (id_aluno, id_pessoa) values (3, 6);
 
 -- -----------------------------------------------------
--- Table PROFESSOR
+-- Table PROFESSOR Tipo 1
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS PROFESSOR (
   ID_PROFESSOR INT NOT NULL AUTO_INCREMENT,
@@ -60,6 +70,10 @@ CREATE TABLE IF NOT EXISTS PROFESSOR (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+insert into professor (id_professor, id_pessoa) values (1, 1);
+insert into professor (id_professor, id_pessoa) values (2, 3);
+insert into professor (id_professor, id_pessoa) values (3, 5);
+insert into professor (id_professor, id_pessoa) values (4, 7);
 
 -- -----------------------------------------------------
 -- Table TURMA
@@ -73,7 +87,6 @@ CREATE TABLE IF NOT EXISTS TURMA (
   PRIMARY KEY (ID_TURMA))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table CURSO
 -- -----------------------------------------------------
@@ -83,6 +96,10 @@ CREATE TABLE IF NOT EXISTS CURSO (
   ATIVO TINYINT(2) NULL,
   PRIMARY KEY (ID_CURSO))
 ENGINE = InnoDB;
+
+insert into curso (id_curso, nome, ativo) values (1, 'Analise e Desenvolvimento de sistemas',1);
+insert into curso (id_curso, nome, ativo) values (2, 'Tecnologia da desinformação',1);
+insert into curso (id_curso, nome, ativo) values (3, 'Estética e cosmética',1);
 
 
 -- -----------------------------------------------------
@@ -128,11 +145,17 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS MATERIA (
   ID_MATERIA INT NOT NULL AUTO_INCREMENT,
   ID_PERIODO INT NOT NULL,
+  ID_PROFESSOR INT NOT NULL,
   NOME VARCHAR(45) NOT NULL,
   PRIMARY KEY (ID_MATERIA),
   CONSTRAINT fk_MATERIA_PERIODO1
     FOREIGN KEY (ID_PERIODO)
     REFERENCES PERIODO (ID_PERIODO)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT fk_MATERIA_PROFESSOR1
+    FOREIGN KEY (ID_PROFESSOR)
+    REFERENCES PROFESSOR (ID_PROFESSOR)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -163,12 +186,13 @@ ENGINE = InnoDB;
 -- Table DIARIO
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS DIARIO (
+  ID_DIARIO INT NOT NULL, 
   ID_TURMA_MATERIA INT NOT NULL,
   ID_PROFESSOR INT NOT NULL,
   DATA DATE NOT NULL,
   QTDE_AULAS_DIA INT(11) NOT NULL,
   QTDE_FALTAS INT(11) NOT NULL,
-  PRIMARY KEY (ID_TURMA_MATERIA, ID_PROFESSOR),
+  PRIMARY KEY (ID_DIARIO),
   CONSTRAINT fk_ALUNO_TURMA_has_MATERIA_has_PROFESSOR_ALUNO_TURMA_has_MATE1
     FOREIGN KEY (ID_TURMA_MATERIA)
     REFERENCES ALUNO_TURMA_MATERIA (ID_TURMA_MATERIA)

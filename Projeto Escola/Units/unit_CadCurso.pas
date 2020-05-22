@@ -150,10 +150,10 @@ begin
                                           ' where id_curso = '+
                                           Format('%s', [vCurso.getCampoFromListaValores(0)]));
 
-                     vCadCurso_Materia.slCampos.Add('ID_CURSO_MATERIA');
-                     vCadCurso_Materia.slCampos.Add('ID_CURSO');
-                     vCadCurso_Materia.slCampos.Add('ID_MATERIA');
-                     vCadCurso_Materia.slValores := vConsulta.getConsultaDados(vCadCurso_Materia.slCampos);
+                    vCadCurso_Materia.slCampos.Add('ID_CURSO_MATERIA');
+                    vCadCurso_Materia.slCampos.Add('ID_CURSO');
+                    vCadCurso_Materia.slCampos.Add('ID_MATERIA');
+                    vCadCurso_Materia.slValores := vConsulta.getConsultaDados(vCadCurso_Materia.slCampos);
 
 
                end

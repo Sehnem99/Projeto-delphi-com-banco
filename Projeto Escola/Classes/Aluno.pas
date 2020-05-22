@@ -18,6 +18,14 @@ type TAluno_Turma = class(TCadastro)
 
 end;
 
+type TAluno_Turma_Materia = class(TCadastro)
+   private
+
+   public
+
+end;
+
+
 implementation
 
 end.

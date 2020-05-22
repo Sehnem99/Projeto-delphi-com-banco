@@ -7,6 +7,7 @@ uses
 type TCadastro = class
    private
       function getTextoInsert:String;
+      function getTextoInsertAlunoTumaMateria(pIdAlunoTurma, pIdCurso:String):String;
       function getTextoUpdate:String;
       function getTextoIdMax(sTabela: String):String;
 
@@ -32,6 +33,7 @@ type TCadastro = class
      function getIdMaxTabela:String;
 
      procedure insert(var slDados:TStringList);
+     procedure insertAlunoTurmaMateria(pCodigoCurso:String; var slDados:TStringList);
      procedure select(icampo:integer; svalor:string);
      procedure delete;
 end;
@@ -161,6 +163,19 @@ begin
         end;
 end;
 
+function TCadastro.getTextoInsertAlunoTumaMateria(pIdAlunoTurma, pIdCurso:String): String;
+var
+   vSQL: String;
+begin
+     //considerar que o campo zero de cada tabela é auto increment
+     vSQL := format ('insert into %s  ', [self.sTabela])+
+                     'select ''0'','+ format('%s',[pIdAlunoTurma])+','+
+                     '       a.id_materia '+
+                     '  from curso_materia a' +
+                     ' where a.id_curso = '+ format('%s',[pIdCurso])+';';
+     result := vSQL;
+end;
+
 function TCadastro.getTextoUpdate: String;
 var
    i: integer;
@@ -214,6 +229,30 @@ begin
         if (StrToInt(slDados.Strings[0]) = 0) then
          slDados.Strings[0] :=  getIdMaxTabela;
        //Limpar a Query e passatr o insert na professor
+     except
+          on E:Exception do
+            raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);
+     end;
+end;
+
+procedure TCadastro.insertAlunoTurmaMateria(pCodigoCurso: String;
+  var slDados: TStringList);
+var
+   i:integer;
+   sSql:String;
+begin
+     if (self.estado = 0) then
+       sSql := self.getTextoInsertAlunoTumaMateria(slValores.Strings[1],pCodigoCurso)
+     else
+         sSql := self.getTextoUpdate +
+         Format(' where (' + slCampos.Strings[0] + ' =  %s)', [slDados.Strings[0]]);
+
+     qrCadastro.Close;
+     qrCadastro.SQL.Clear;
+     qrCadastro.SQL.Add(sSql);
+
+     try
+        qrCadastro.ExecSQL;
      except
           on E:Exception do
             raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);

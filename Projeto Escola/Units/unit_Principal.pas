@@ -35,7 +35,6 @@ type
     mnPeriodo: TMenuItem;
     imgPrincipal: TImage;
     mnTurma: TMenuItem;
-    mnMateria: TMenuItem;
     mnContato: TMenuItem;
     procedure MenuItem3Click(Sender: TObject);
     procedure mnCursoClick(Sender: TObject);
