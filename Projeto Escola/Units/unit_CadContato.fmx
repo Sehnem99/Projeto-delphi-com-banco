@@ -94,6 +94,9 @@ object form_CadContato: Tform_CadContato
     TabOrder = 1
   end
   object cbPessoa: TComboBox
+    Items.Strings = (
+      'Selecione a Pessoa')
+    ItemIndex = 0
     Position.X = 244.000000000000000000
     Position.Y = 75.000000000000000000
     Size.Width = 204.000000000000000000

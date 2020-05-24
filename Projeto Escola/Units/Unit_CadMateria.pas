@@ -59,8 +59,7 @@ begin
    vCadCurso_Materia.slValores.Add(IntToStr(FID_Curso));
 
    try
-     vConsulta.setTextosql('Select * from periodo');
-     vConsulta.getCarregaCB(cbPeriodo,'PERIODO');
+     vConsulta.getCarregaCB('periodo','periodo',cbPeriodo);
    finally
      FreeAndNil(vConsulta);
    end;
@@ -205,13 +204,13 @@ begin
   if (vMateria.getEstado = 1) then
    begin
      vMateria.slValores.Strings[1] := edNome.Text;
-     vMateria.slValores.Strings[2] := IntToStr(cbPeriodo.ItemIndex + 1);
+     vMateria.slValores.Strings[2] := IntToStr(Integer(cbPeriodo.Items.Objects[cbPeriodo.ItemIndex]));
    end
  else
    begin
      vMateria.slValores.Clear;
      vMateria.slValores.Add('0');
-     vMateria.slValores.Add(IntToStr(cbPeriodo.ItemIndex + 1));
+     vMateria.slValores.Add(IntToStr(Integer(cbPeriodo.Items.Objects[cbPeriodo.ItemIndex])));
      vMateria.slValores.Add(edNome.Text);
    end;
 

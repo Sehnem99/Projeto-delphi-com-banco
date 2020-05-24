@@ -199,8 +199,8 @@ begin
      if (self.estado = 0) then
        sSql := self.getTextoInsert
      else
-         sSql := self.getTextoUpdate +
-         Format(' where (' + slCampos.Strings[0] + ' =  %s)', [slDados.Strings[0]]);
+       sSql := self.getTextoUpdate +
+       Format(' where (' + slCampos.Strings[0] + ' =  %s)', [slDados.Strings[0]]);
 
      qrCadastro.Close;
      qrCadastro.SQL.Clear;

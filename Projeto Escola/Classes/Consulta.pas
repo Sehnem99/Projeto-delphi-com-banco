@@ -30,7 +30,7 @@ type TConsulta = class
         procedure getConsultaToSg(var sgConsulta:TStringGrid);
         procedure setcolunaRetorno(colunaRetorno:integer);
         function getcolunaRetorno:integer;
-        function getCarregaCB(vCombo: TComboBox;vField: String): TStringList;
+        procedure getCarregaCB(sTabela, sCuluna: String;vComboBox: TComboBox);
         function getConsultaDados(slCampos:TStringList): TStringList;
         function getfTemRegistroConsulta: Boolean;
 
@@ -110,33 +110,36 @@ begin
   Result := Self.fTemRegistroConsulta;
 end;
 
-function TConsulta.getCarregaCB(vCombo: TComboBox;vField: String): TStringList;
+procedure TConsulta.getCarregaCB(sTabela, sCuluna: String;vComboBox: TComboBox);
 var
-   qrConsulta: TFDQuery;
-   Lista:TStringList;
-   i:integer;
+  id: Integer;
+  s: string;
+  qrConsulta: TFDQuery;
+  vSQL : String;
 begin
-     qrConsulta := TFDQuery.Create(nil);
-     qrConsulta.Connection := dm_BancoDados.FDEscola;
-     qrConsulta.Close;
-     qrConsulta.SQL.Clear;
-     qrConsulta.SQL.Add(self.getTextosql);
+  qrConsulta := TFDQuery.Create(nil);
+  try
+    qrConsulta.Connection := dm_BancoDados.FDEscola;
+    qrConsulta.Close;
+    qrConsulta.SQL.Clear;
+    vSQL := 'Select * from '+ Format('%s', [sTabela]);
+    qrConsulta.SQL.Add(vSQL);
+    qrConsulta.Open;
 
-     try
-       qrConsulta.Open;
-
-       if (not qrConsulta.IsEmpty) then
-        begin
-          While not qrConsulta.EOF do
-            begin
-             vCombo.Items.Add(qrConsulta.FieldByName(vField).asString);
-             qrConsulta.Next;
-            end;
-        end;
-     finally
-       qrConsulta.Close;
-       FreeAndNil(qrConsulta)
-     end;
+    with qrConsulta do
+    begin
+      First;
+      while not Eof do
+      begin
+        id := FieldByName('ID_'+ Format('%s', [sTabela])).AsInteger;
+        s := FieldByName(sCuluna).AsString;
+        vComboBox.Items.AddObject(s, TObject(id)); // typecast necessário
+        Next;
+      end;
+    end;
+  finally
+    FreeAndNil(qrConsulta);
+  end;
 end;
 
 function TConsulta.getcolunaRetorno: integer;

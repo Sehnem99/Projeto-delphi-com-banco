@@ -23,8 +23,8 @@ uses System.SysUtils
    , Aluno
    , Turma
    , Curso
-   , Cadastro, Data.DB, Datasnap.DBClient
-   ;
+   , Cadastro
+   , FireDAC.Comp.Client;
 {$ENDREGION}
 
 type
@@ -64,8 +64,6 @@ type
   public
     { Public declarations }
     procedure setCadAluno(sEstado:Integer);
-    procedure setCadAlunoTurma();
-    procedure setCadAlunoTurmaMateria();
     procedure setCadProfessor(sEstado:Integer);
     procedure getCadAluno(pIdPessoa:String);
     procedure getCadAlunoTurma(pIdAluno:String);
@@ -119,11 +117,8 @@ begin
 
   vConsulta := TConsulta.create;
   try
-    vConsulta.setTextosql('Select * from turma');
-    vConsulta.getCarregaCB(cbTurma,'descricao');
-
-    vConsulta.setTextosql('Select * from curso');
-    vConsulta.getCarregaCB(cbCurso,'nome');
+    vConsulta.getCarregaCB('turma','descricao',cbTurma);
+    vConsulta.getCarregaCB('curso','nome',cbCurso);
   finally
     FreeAndNil(vConsulta);
   end;
@@ -242,28 +237,23 @@ begin
   try
     //Estado = 0 - Inserir
     //Estado = 1 - Atualizar
-    if (vAluno.estado = 1) then
-        begin
-         vAluno_Turma_Materia.delete;
-         vAluno_Turma.delete;
-        end
-    else
-        begin
-          vAluno.slValores.Add('0');
-          vAluno.slValores.Add(vPessoa.slValores.Strings[0]);
-          vAluno.insert(vAluno.slValores);
+    if (vAluno.estado = 0) then
+      begin
+        vAluno.slValores.Add('0');
+        vAluno.slValores.Add(vPessoa.slValores.Strings[0]);
+        vAluno.insert(vAluno.slValores);
 
-          vAluno_Turma.slValores.Add('0');
-          vAluno_Turma.slValores.Add(vAluno.getCampoFromListaValores(0));
-          vAluno_Turma.slValores.Add(IntToStr(cbTurma.ItemIndex));
-          vAluno_Turma.slValores.Add(IntToStr(cbCurso.ItemIndex));
-          vAluno_Turma.insert(vAluno_Turma.slValores);
+        vAluno_Turma.slValores.Add('0');
+        vAluno_Turma.slValores.Add(vAluno.getCampoFromListaValores(0));
+        vAluno_Turma.slValores.Add(IntToStr(Integer(cbTurma.Items.Objects[cbTurma.ItemIndex])));
+        vAluno_Turma.slValores.Add(IntToStr(Integer(cbCurso.Items.Objects[cbCurso.ItemIndex])));
+        vAluno_Turma.insert(vAluno_Turma.slValores);
 
-          vAluno_Turma_Materia.slValores.Add('0');
-          vAluno_Turma_Materia.slValores.Add(vAluno_Turma.getCampoFromListaValores(0));
-          vAluno_Turma_Materia.slValores.Add('0');
-          vAluno_Turma_Materia.insertAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(3),vAluno_Turma_Materia.slValores);
-        end;
+        vAluno_Turma_Materia.slValores.Add('0');
+        vAluno_Turma_Materia.slValores.Add(vAluno_Turma.getCampoFromListaValores(0));
+        vAluno_Turma_Materia.slValores.Add('0');
+        vAluno_Turma_Materia.insertAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(3),vAluno_Turma_Materia.slValores);
+      end;
 
   finally
 
@@ -299,8 +289,10 @@ begin
   try
     vConsulta.setTitulo('Consulta Pessoas');
     vConsulta.setTextosql('Select id_pessoa ''Código'',' +
-                          'Nome Nome, Cpf Cpf, dt_nasc ''dt.Nasc.'' '+
-                          'from pessoa order by nome');
+                          'Nome ''Nome'', Cpf ''CPF'', dt_nasc ''Dt.Nasc.'' '+
+                          'from pessoa ' +
+                          'where ativo <> 0' +
+                          'order by Nome');
     vConsulta.getConsulta;
 
     if (vConsulta.getRetorno <> '') then
@@ -349,7 +341,7 @@ begin
       exit
   else
     begin
-      vPessoa.slValores.Strings[4] := 0;
+      vPessoa.slValores.Strings[4] := '0';
       vPessoa.insert(vPessoa.slValores);
     end;
 
@@ -380,16 +372,15 @@ begin
         vPessoa.slValores.Add(edCpf.Text);
         vPessoa.slValores.Add(DateToStr(dtDataNasc.Date));
         vPessoa.slValores.Add(IntToStr(cbTipo.ItemIndex));
+        vPessoa.slValores.Add('1');
       end;
 
   vPessoa.insert(vPessoa.slValores);
 
   if (StrToInt(vPessoa.slValores.Strings[4]) = 1) then
-      setCadProfessor(vPessoa.getEstado)
+    setCadProfessor(vPessoa.getEstado)
   else
-      begin
-        setCadAluno(vPessoa.getEstado);
-      end;
+    setCadAluno(vPessoa.getEstado);
 
   vPessoa.utilitario.LimpaTela(self);
   edNome.SetFocus;

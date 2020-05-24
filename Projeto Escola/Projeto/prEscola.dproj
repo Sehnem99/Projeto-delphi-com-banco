@@ -166,18 +166,27 @@
             <Form>Form_CadPeriodo</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="..\Classes\Periodo.pas"/>
-        <DCCReference Include="..\Professor.pas"/>
-        <DCCReference Include="..\Units\Unit_CadTurma.pas">
-            <Form>Form_CadTurma</Form>
+        <DCCReference Include="..\Classes\Periodo.pas">
+            <Form>/  Professor in &apos;..\Classes\Professor.pas&apos;;</Form>
+        </DCCReference>
+        <DCCReference Include="..\Classes\Professor.pas"/>
+        <DCCReference Include="..\Units\unit_Chamada.pas">
+            <Form>frm_Chamada</Form>
+        </DCCReference>
+        <DCCReference Include="..\Units\unit_CadTurma.pas">
+            <Form>form_CadTurma</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="..\Classes\Turma.pas"/>
-        <DCCReference Include="..\Units\Unit_CadMateria.pas">
-            <Form>Form_CadMateria</Form>
+        <DCCReference Include="..\Units\unit_CadMateria.pas">
+            <Form>form_CadMateria</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="..\Classes\Materia.pas"/>
+        <DCCReference Include="..\Units\unit_CadContato.pas">
+            <Form>form_CadContato</Form>
+        </DCCReference>
+        <DCCReference Include="..\Classes\Contato.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

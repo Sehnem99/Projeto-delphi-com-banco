@@ -42,6 +42,9 @@ object Form_CadMateria: TForm_CadMateria
     TabOrder = 0
   end
   object cbPeriodo: TComboBox
+    Items.Strings = (
+      'Selecione o Per'#237'odo')
+    ItemIndex = 0
     Position.X = 176.000000000000000000
     Position.Y = 72.000000000000000000
     Size.Width = 145.000000000000000000

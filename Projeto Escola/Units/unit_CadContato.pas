@@ -64,8 +64,7 @@ begin
    vContato := TContato.Create('CONTATO');
    vConsulta := TConsulta.create;
    try
-     vConsulta.setTextosql('Select * from pessoa');
-     vConsulta.getCarregaCB(cbPessoa,'nome');
+     vConsulta.getCarregaCB('pessoa','nome',cbPessoa);
    finally
      FreeAndNil(vConsulta);
    end;
@@ -140,7 +139,7 @@ procedure Tform_CadContato.sbtnSalvarClick(Sender: TObject);
 begin
   if (vContato.getEstado = 1) then
       begin
-        vContato.slValores.Strings[1] := IntToStr(cbPessoa.ItemIndex);
+        vContato.slValores.Strings[1] := IntToStr(Integer(cbPessoa.Items.Objects[cbPessoa.ItemIndex]));;
         vContato.slValores.Strings[2] := edEmail.Text;
         vContato.slValores.Strings[3] := edTelefone.Text;
         vContato.slValores.Strings[4] := edCelular.Text;
@@ -149,7 +148,7 @@ begin
       begin
         vContato.slValores.Clear;
         vContato.slValores.Add('0');
-        vContato.slValores.Add(IntToStr(cbPessoa.ItemIndex));
+        vContato.slValores.Add(IntToStr(Integer(cbPessoa.Items.Objects[cbPessoa.ItemIndex])));
         vContato.slValores.Add(edEmail.Text);
         vContato.slValores.Add(edTelefone.Text);
         vContato.slValores.Add(edCelular.Text);
