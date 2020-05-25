@@ -3,8 +3,8 @@ object form_CadContato: Tform_CadContato
   Top = 0
   BorderStyle = Single
   Caption = 'Cadastro de Contato'
-  ClientHeight = 300
-  ClientWidth = 650
+  ClientHeight = 192
+  ClientWidth = 548
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -15,9 +15,9 @@ object form_CadContato: Tform_CadContato
   object sbtnNovo: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
-    ImageIndex = 4
-    Position.X = 203.000000000000000000
-    Position.Y = 204.000000000000000000
+    ImageIndex = 0
+    Position.X = 171.000000000000000000
+    Position.Y = 148.000000000000000000
     Size.Width = 61.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -29,9 +29,9 @@ object form_CadContato: Tform_CadContato
   object sbtnSalvar: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
-    ImageIndex = 3
-    Position.X = 286.000000000000000000
-    Position.Y = 204.000000000000000000
+    ImageIndex = 2
+    Position.X = 254.000000000000000000
+    Position.Y = 148.000000000000000000
     Size.Width = 65.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -43,9 +43,9 @@ object form_CadContato: Tform_CadContato
   object sbtnExcluir: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
-    ImageIndex = 1
-    Position.X = 371.000000000000000000
-    Position.Y = 204.000000000000000000
+    ImageIndex = 0
+    Position.X = 339.000000000000000000
+    Position.Y = 148.000000000000000000
     Size.Width = 68.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -57,15 +57,15 @@ object form_CadContato: Tform_CadContato
   object edEmail: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 3
-    Position.X = 243.000000000000000000
-    Position.Y = 108.000000000000000000
+    Position.X = 51.000000000000000000
+    Position.Y = 60.000000000000000000
     Size.Width = 205.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
   end
   object lbPessoa: TLabel
-    Position.X = 192.000000000000000000
-    Position.Y = 77.000000000000000000
+    Position.X = 160.000000000000000000
+    Position.Y = 29.000000000000000000
     Size.Width = 54.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -74,9 +74,9 @@ object form_CadContato: Tform_CadContato
   end
   object sbtnBusca: TSpeedButton
     Images = dm_BancoDados.ImageList1
-    ImageIndex = 2
-    Position.X = 449.000000000000000000
-    Position.Y = 76.000000000000000000
+    ImageIndex = 1
+    Position.X = 417.000000000000000000
+    Position.Y = 28.000000000000000000
     Size.Width = 33.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -85,8 +85,8 @@ object form_CadContato: Tform_CadContato
     OnClick = sbtnBuscaClick
   end
   object lbEmail: TLabel
-    Position.X = 194.000000000000000000
-    Position.Y = 110.000000000000000000
+    Position.X = 2.000000000000000000
+    Position.Y = 62.000000000000000000
     Size.Width = 54.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -97,16 +97,16 @@ object form_CadContato: Tform_CadContato
     Items.Strings = (
       'Selecione a Pessoa')
     ItemIndex = 0
-    Position.X = 244.000000000000000000
-    Position.Y = 75.000000000000000000
+    Position.X = 212.000000000000000000
+    Position.Y = 27.000000000000000000
     Size.Width = 204.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 6
   end
   object lbTelefone: TLabel
-    Position.X = 183.000000000000000000
-    Position.Y = 141.000000000000000000
+    Position.X = 271.000000000000000000
+    Position.Y = 63.000000000000000000
     Size.Width = 54.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -116,8 +116,8 @@ object form_CadContato: Tform_CadContato
   object edTelefone: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 9
-    Position.X = 244.000000000000000000
-    Position.Y = 140.000000000000000000
+    Position.X = 332.000000000000000000
+    Position.Y = 62.000000000000000000
     Size.Width = 204.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -125,15 +125,15 @@ object form_CadContato: Tform_CadContato
   object edCelular: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 10
-    Position.X = 244.000000000000000000
-    Position.Y = 173.000000000000000000
+    Position.X = 212.000000000000000000
+    Position.Y = 109.000000000000000000
     Size.Width = 204.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
   end
   object lbCelular: TLabel
-    Position.X = 190.000000000000000000
-    Position.Y = 175.000000000000000000
+    Position.X = 158.000000000000000000
+    Position.Y = 111.000000000000000000
     Size.Width = 55.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False

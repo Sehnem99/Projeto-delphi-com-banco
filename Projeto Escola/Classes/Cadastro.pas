@@ -36,6 +36,7 @@ type TCadastro = class
      procedure insertAlunoTurmaMateria(pCodigoCurso:String; var slDados:TStringList);
      procedure select(icampo:integer; svalor:string);
      procedure delete;
+     procedure deleteItens(ID:String);
 end;
 
 
@@ -300,6 +301,22 @@ begin
           on E:Exception do
             raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);
      end;
+end;
+
+procedure TCadastro.deleteItens(ID:String);
+begin
+   qrCadastro.Close;
+   qrCadastro.SQL.Clear;
+   qrCadastro.SQL.Add(Format('delete from %s where (%s = :valor)', [self.getTabela, self.getCampoFromLista(0)]));
+   qrCadastro.Params[0].Value := ID;
+
+   try
+      qrCadastro.ExecSQL;
+   except
+        on E:Exception do
+          raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);
+   end;
+
 end;
 
 end.

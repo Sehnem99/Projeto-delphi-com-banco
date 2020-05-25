@@ -66,7 +66,7 @@ begin
 	                        '         b.nome                 '+#13+
                           '  from professor a, pessoa b    '+#13+
                           ' where a.id_pessoa = b.id_pessoa');
-     vConsulta.getCarregaCB('professor','periodo',cbPeriodo, True);
+     vConsulta.getCarregaCB('professor','nome',cbProfessor, True);
    finally
      FreeAndNil(vConsulta);
    end;
@@ -142,7 +142,7 @@ begin
                           '       m.id_periodo ''Codigo Periodo'','+
                           '       p.periodo ''Nome do Periodo'','+
                           '       cm.id_curso_materia ''Codigo Curso Materia'''+
-                          '  from materia m,periodo p, curso_materia cm'+
+                          '  from materia m,periodo p, curso_materia cm,'+
                           ' where m.id_periodo = p.id_periodo'+
                           '   and m.id_materia = cm.id_Materia'+
                           '   and cm.id_curso = '+ Format('%s',[IntToStr(FID_Curso)])+
@@ -218,6 +218,7 @@ begin
      vMateria.slValores.Clear;
      vMateria.slValores.Add('0');
      vMateria.slValores.Add(IntToStr(Integer(cbPeriodo.Items.Objects[cbPeriodo.ItemIndex])));
+     vMateria.slValores.Add(IntToStr(Integer(cbProfessor.Items.Objects[cbPeriodo.ItemIndex])));
      vMateria.slValores.Add(edNome.Text);
    end;
 

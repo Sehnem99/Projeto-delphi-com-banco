@@ -107,6 +107,10 @@ var
   vConsulta : TConsulta;
 begin
   vPessoa := TPessoa.Create('pessoa');
+
+  vProfessor := TProfessor.Create('professor');
+  vProfessor.estado := 0;
+
   vAluno       := TAluno.Create('aluno');
   vAluno_Turma := TAluno_Turma.Create('aluno_turma');
   vAluno_Turma_Materia := TAluno_Turma_Materia.Create('aluno_turma_materia');
@@ -174,7 +178,7 @@ begin
     vAluno_Turma.slCampos.Add('ID_ALUNO');
     vAluno_Turma.slCampos.Add('ID_TURMA');
     vAluno_Turma.slCampos.Add('ID_CURSO');
-    vAluno.slValores := vConsulta.getConsultaDados(vAluno_Turma.slCampos);
+    vAluno_Turma.slValores := vConsulta.getConsultaDados(vAluno_Turma.slCampos);
 
     getCadAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(0));
   finally
@@ -189,14 +193,14 @@ begin
   vConsulta := TConsulta.create;
   try
     vConsulta.setTextosql('select * '+#13+
-                          '  from aluno_turma'+#13+
-                          ' where id_aluno = '+
+                          '  from aluno_turma_materia'+#13+
+                          ' where id_aluno_turma = '+
                           Format('%s', [pIdAlunoTurma]));
 
     vAluno_Turma_Materia.slCampos.Add('ID_TURMA_MATERIA');
     vAluno_Turma_Materia.slCampos.Add('ID_ALUNO_TURMA');
     vAluno_Turma_Materia.slCampos.Add('ID_MATERIA');
-    vAluno.slValores := vConsulta.getConsultaDados(vAluno_Turma_Materia.slCampos);
+    vAluno_Turma_Materia.slValores := vConsulta.getConsultaDados(vAluno_Turma_Materia.slCampos);
   finally
     FreeAndNil(vConsulta);
   end;
@@ -213,10 +217,11 @@ begin
                           ' where id_professor = '+
                           Format('%s', [pIdCadPessoa]));
 
+
+    vProfessor.slCampos.Clear;
     vProfessor.slCampos.Add('ID_PROFESSOR');
     vProfessor.slCampos.Add('ID_PESSOA');
     vProfessor.slValores := vConsulta.getConsultaDados(vProfessor.slCampos);
-
   finally
     FreeAndNil(vConsulta);
   end;
@@ -233,7 +238,6 @@ end;
 procedure Tform_CadPessoa.setCadAluno(sEstado:Integer);
 begin
   vAluno.estado := sEstado;
-  vAluno_Turma_Materia.Estado := sEstado;
   try
     //Estado = 0 - Inserir
     //Estado = 1 - Atualizar
@@ -252,7 +256,26 @@ begin
         vAluno_Turma_Materia.slValores.Add('0');
         vAluno_Turma_Materia.slValores.Add(vAluno_Turma.getCampoFromListaValores(0));
         vAluno_Turma_Materia.slValores.Add('0');
-        vAluno_Turma_Materia.insertAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(3),vAluno_Turma_Materia.slValores);
+        vAluno_Turma_Materia.insertAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(3),
+                                                     vAluno_Turma_Materia.slValores);
+      end
+    else
+      begin
+        vAluno_Turma_Materia.deleteItens(vAluno_Turma_Materia.getCampoFromListaValores(0));
+
+        vAluno_Turma.slValores.Clear;
+        vAluno_Turma.slValores.Add('0');
+        vAluno_Turma.slValores.Add(vAluno.getCampoFromListaValores(0));
+        vAluno_Turma.slValores.Add(IntToStr(Integer(cbTurma.Items.Objects[cbTurma.ItemIndex])));
+        vAluno_Turma.slValores.Add(IntToStr(Integer(cbCurso.Items.Objects[cbCurso.ItemIndex])));
+        vAluno_Turma.insert(vAluno_Turma.slValores);
+
+        vAluno_Turma_Materia.slValores.Clear;
+        vAluno_Turma_Materia.slValores.Add('0');
+        vAluno_Turma_Materia.slValores.Add(vAluno_Turma.getCampoFromListaValores(0));
+        vAluno_Turma_Materia.slValores.Add('0');
+        vAluno_Turma_Materia.insertAlunoTurmaMateria(vAluno_Turma.getCampoFromListaValores(3),
+                                                     vAluno_Turma_Materia.slValores);
       end;
 
   finally
@@ -264,8 +287,6 @@ end;
 procedure Tform_CadPessoa.setCadProfessor(sEstado:Integer);
 
 begin
-  vProfessor := TProfessor.Create('professor');
-  vProfessor.estado := sEstado;
   try
     //Estado = 0 - Inserir
     //Estado = 1 - Atualizar
@@ -313,11 +334,15 @@ begin
                   else
                     begin
                       getCadAluno(vPessoa.getCampoFromListaValores(0));
+
+                      cbCurso.ItemIndex := Integer(cbCurso.Items.Objects[
+                                                   StrToInt(vAluno_Turma.getCampoFromListaValores(3))]);
+
+                      cbTurma.ItemIndex := Integer(cbCurso.Items.Objects[
+                                                   StrToInt(vAluno_Turma.getCampoFromListaValores(2))]);
                     end;
 
                   vPessoa.estado   := 1;
-
-
                 end
              else
                 begin
@@ -327,6 +352,8 @@ begin
                   edCpf.Text := '';
                   dtDataNasc.Date := Date;
                   cbTipo.Index := 0;
+                  cbTurma.Index := 0;
+                  cbCurso.Index := 0;
                 end;
        end;
 
