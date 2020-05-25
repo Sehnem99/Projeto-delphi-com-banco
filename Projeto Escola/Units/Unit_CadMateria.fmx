@@ -21,11 +21,11 @@ object Form_CadMateria: TForm_CadMateria
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Nome:'
-    TabOrder = 1
+    TabOrder = 2
   end
   object edNome: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 2
+    TabOrder = 3
     Position.X = 176.000000000000000000
     Position.Y = 32.000000000000000000
     Size.Width = 145.000000000000000000
@@ -39,7 +39,7 @@ object Form_CadMateria: TForm_CadMateria
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
     Text = 'Periodo:'
-    TabOrder = 0
+    TabOrder = 1
   end
   object cbPeriodo: TComboBox
     Items.Strings = (
@@ -50,14 +50,14 @@ object Form_CadMateria: TForm_CadMateria
     Size.Width = 145.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 5
   end
   object sbtnNovo: TSpeedButton
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 0
-    Position.X = 90.000000000000000000
-    Position.Y = 124.000000000000000000
+    Position.X = 95.000000000000000000
+    Position.Y = 147.000000000000000000
     Size.Width = 76.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -70,8 +70,8 @@ object Form_CadMateria: TForm_CadMateria
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 2
-    Position.X = 183.000000000000000000
-    Position.Y = 124.000000000000000000
+    Position.X = 188.000000000000000000
+    Position.Y = 147.000000000000000000
     Size.Width = 76.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -84,8 +84,8 @@ object Form_CadMateria: TForm_CadMateria
     StyledSettings = [Family, Style, FontColor]
     Images = dm_BancoDados.ImageList1
     ImageIndex = 0
-    Position.X = 283.000000000000000000
-    Position.Y = 123.000000000000000000
+    Position.X = 288.000000000000000000
+    Position.Y = 146.000000000000000000
     Size.Width = 76.000000000000000000
     Size.Height = 37.000000000000000000
     Size.PlatformDefault = False
@@ -105,5 +105,25 @@ object Form_CadMateria: TForm_CadMateria
     StyleLookup = 'actiontoolbutton'
     Text = 'sbtnBusca'
     OnClick = sbtnBuscaClick
+  end
+  object Label2: TLabel
+    Position.X = 96.000000000000000000
+    Position.Y = 111.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Professor:'
+    TabOrder = 0
+  end
+  object cbProfessor: TComboBox
+    Items.Strings = (
+      'Selecione o Professor')
+    ItemIndex = 0
+    Position.X = 175.000000000000000000
+    Position.Y = 109.000000000000000000
+    Size.Width = 145.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
   end
 end

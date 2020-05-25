@@ -252,7 +252,7 @@ begin
      qrCadastro.SQL.Add(sSql);
 
      try
-        qrCadastro.ExecSQL;
+       qrCadastro.ExecSQL;
      except
           on E:Exception do
             raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);

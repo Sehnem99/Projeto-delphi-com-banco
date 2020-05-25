@@ -32,15 +32,7 @@ type
 
   private
     { Private declarations }
-    FID_Curso: Integer;
-    retorno: string;
-    colunaRetorno:integer;
-    iColPesq :Integer;
     procedure CaregaStringGrid(vCodCurso: Integer);
-    procedure setRetorno(retorno:string);
-    function getcolunaRetorno: integer;
-    procedure setiColPesq(iColPesq:integer);
-    function getiColPesq:integer;
 
   public
     { Public declarations }
@@ -89,16 +81,6 @@ end;
 procedure TForm_CadCurso.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(vCurso);
-end;
-
-function TForm_CadCurso.getcolunaRetorno: integer;
-begin
- result := self.colunaRetorno;
-end;
-
-function TForm_CadCurso.getiColPesq: integer;
-begin
-  result := self.iColPesq;
 end;
 
 procedure TForm_CadCurso.sbtnAdcExclMateriaClick(Sender: TObject);
@@ -236,16 +218,5 @@ begin
  vCurso.utilitario.LimpaTela(self);
  edNome.SetFocus;
 end;
-
-procedure TForm_CadCurso.setiColPesq(iColPesq: integer);
-begin
-   self.iColPesq := iColPesq;
-end;
-
-procedure TForm_CadCurso.setRetorno(retorno: string);
-begin
-      self.retorno := retorno;
-end;
-
 
 end.

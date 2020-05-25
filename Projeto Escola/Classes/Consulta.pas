@@ -30,7 +30,7 @@ type TConsulta = class
         procedure getConsultaToSg(var sgConsulta:TStringGrid);
         procedure setcolunaRetorno(colunaRetorno:integer);
         function getcolunaRetorno:integer;
-        procedure getCarregaCB(sTabela, sCuluna: String;vComboBox: TComboBox);
+        procedure getCarregaCB(sTabela, sCuluna: String;vComboBox: TComboBox;vUltSQL:Boolean = False);
         function getConsultaDados(slCampos:TStringList): TStringList;
         function getfTemRegistroConsulta: Boolean;
 
@@ -110,7 +110,7 @@ begin
   Result := Self.fTemRegistroConsulta;
 end;
 
-procedure TConsulta.getCarregaCB(sTabela, sCuluna: String;vComboBox: TComboBox);
+procedure TConsulta.getCarregaCB(sTabela, sCuluna: String;vComboBox: TComboBox; vUltSQL:Boolean = false);
 var
   id: Integer;
   s: string;
@@ -122,7 +122,11 @@ begin
     qrConsulta.Connection := dm_BancoDados.FDEscola;
     qrConsulta.Close;
     qrConsulta.SQL.Clear;
-    vSQL := 'Select * from '+ Format('%s', [sTabela]);
+    //True Utiliza o texto passado.
+    if vUltSQL then
+      vSQL := self.getTextosql
+    else
+      vSQL := 'Select * from '+ Format('%s', [sTabela]);
     qrConsulta.SQL.Add(vSQL);
     qrConsulta.Open;
 

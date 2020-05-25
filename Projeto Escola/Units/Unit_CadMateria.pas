@@ -17,6 +17,8 @@ type
     sbtnSalvar: TSpeedButton;
     sbtnExcluir: TSpeedButton;
     sbtnBusca: TSpeedButton;
+    Label2: TLabel;
+    cbProfessor: TComboBox;
     procedure sbtnSalvarClick(Sender: TObject);
     procedure sbtnExcluirClick(Sender: TObject);
     procedure sbtnNovoClick(Sender: TObject);
@@ -60,6 +62,11 @@ begin
 
    try
      vConsulta.getCarregaCB('periodo','periodo',cbPeriodo);
+     vConsulta.setTextosql( 'select a.id_professor,        '+#13+
+	                        '         b.nome                 '+#13+
+                          '  from professor a, pessoa b    '+#13+
+                          ' where a.id_pessoa = b.id_pessoa');
+     vConsulta.getCarregaCB('professor','periodo',cbPeriodo, True);
    finally
      FreeAndNil(vConsulta);
    end;

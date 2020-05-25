@@ -288,11 +288,11 @@ begin
   vConsulta := TConsulta.create;
   try
     vConsulta.setTitulo('Consulta Pessoas');
-    vConsulta.setTextosql('Select id_pessoa ''Código'',' +
-                          'Nome ''Nome'', Cpf ''CPF'', dt_nasc ''Dt.Nasc.'' '+
-                          'from pessoa ' +
-                          'where ativo <> 0' +
-                          'order by Nome');
+    vConsulta.setTextosql('Select a.id_pessoa Codigo,' +#13+
+                          'a.nome Nome, a.cpf CPF, a.dt_nasc ''Dt.Nasc.'' '+#13+
+                          'from pessoa a' +#13+
+                          'where a.ativo <> 0 ' +#13+
+                          'order by a.nome');
     vConsulta.getConsulta;
 
     if (vConsulta.getRetorno <> '') then
