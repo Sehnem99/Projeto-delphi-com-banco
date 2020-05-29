@@ -1,14 +1,154 @@
 object form_Chamada: Tform_Chamada
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = Single
   Caption = 'Chamada'
-  ClientHeight = 500
+  ClientHeight = 450
   ClientWidth = 650
   Position = ScreenCenter
-  WindowState = wsMaximized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
+  object pnInferior: TPanel
+    Align = Bottom
+    Position.Y = 392.000000000000000000
+    Size.Width = 650.000000000000000000
+    Size.Height = 58.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btnRegistrarDiario: TButton
+      Anchors = []
+      Images = dm_BancoDados.ImageList1
+      ImageIndex = 4
+      Position.X = 265.000000000000000000
+      Position.Y = 13.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 34.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Registrar Di'#225'rio'
+    end
+  end
+  object pnPrincipal: TPanel
+    Align = Client
+    Size.Width = 650.000000000000000000
+    Size.Height = 287.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object sgChamada: TStringGrid
+      Align = Client
+      CanFocus = True
+      ClipChildren = True
+      Size.Width = 650.000000000000000000
+      Size.Height = 287.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Options = [Editing, ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick, AutoDisplacement]
+      Viewport.Width = 650.000000000000000000
+      Viewport.Height = 287.000000000000000000
+    end
+  end
+  object pnSuperior: TPanel
+    Align = Top
+    Anchors = []
+    Size.Width = 650.000000000000000000
+    Size.Height = 105.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object cbTurma: TComboBox
+      Anchors = []
+      Items.Strings = (
+        'Selecione a turma')
+      ItemIndex = 0
+      Position.X = 111.000000000000000000
+      Position.Y = 26.000000000000000000
+      Size.Width = 189.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+    end
+    object cbMateria: TComboBox
+      Anchors = []
+      Items.Strings = (
+        'Selecione a mat'#233'ria')
+      ItemIndex = 0
+      Position.X = 369.000000000000000000
+      Position.Y = 26.000000000000000000
+      Size.Width = 189.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+    end
+    object lbTurma: TLabel
+      Anchors = [akRight]
+      Position.X = 64.000000000000000000
+      Position.Y = 29.000000000000000000
+      Size.Width = 43.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Turma:'
+      TabOrder = 4
+    end
+    object lbMateria: TLabel
+      Anchors = [akRight]
+      Position.X = 315.000000000000000000
+      Position.Y = 29.000000000000000000
+      Size.Width = 51.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Mat'#233'ria:'
+      TabOrder = 1
+    end
+    object sbConsulta: TSpeedButton
+      Images = dm_BancoDados.ImageList1
+      ImageIndex = 0
+      Position.X = 561.000000000000000000
+      Position.Y = 64.000000000000000000
+      Size.Width = 27.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = sbConsultaClick
+    end
+    object dtInicio: TDateEdit
+      Date = 43973.000000000000000000
+      Position.X = 111.000000000000000000
+      Position.Y = 64.000000000000000000
+      Size.Width = 190.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+    end
+    object dtFim: TDateEdit
+      Date = 43973.000000000000000000
+      Position.X = 369.000000000000000000
+      Position.Y = 64.000000000000000000
+      Size.Width = 190.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+    end
+    object lbDtInicio: TLabel
+      Anchors = [akRight]
+      Position.X = 41.000000000000000000
+      Position.Y = 66.000000000000000000
+      Size.Width = 69.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Data In'#237'cio: '
+      TabOrder = 3
+    end
+    object lbDtFim: TLabel
+      Anchors = [akRight]
+      Position.X = 310.000000000000000000
+      Position.Y = 66.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Data Fim:'
+      TabOrder = 2
+    end
+  end
 end

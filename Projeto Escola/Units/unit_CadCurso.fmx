@@ -62,9 +62,10 @@ object Form_CadCurso: TForm_CadCurso
     TabOrder = 0
     object cbStatus: TComboBox
       Items.Strings = (
+        'Selecione o Status'
         'Inativo'
-        'Ativo'
-        '')
+        'Ativo')
+      ItemIndex = 0
       Position.X = 322.000000000000000000
       Position.Y = 8.000000000000000000
       Size.Width = 185.000000000000000000

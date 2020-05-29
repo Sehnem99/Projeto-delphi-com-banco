@@ -56,14 +56,14 @@ begin
   vConsulta := TConsulta.create;
   try
     gridMaterias.ClearColumns;
-    vConsulta.setTextosql('SELECT A.ID_MATERIA  ''CODIGO'','#13+
-                          '       B.NOME      ''NOME'','#13+
-                          '       C.PERIODO    ''PERIODO'' '#13+
-                          'FROM curso_materia a, materia b,'#13+
-                          '     periodo C              '#13+
-                          'WHERE A.ID_MATERIA = B.ID_MATERIA  '#13+
-                          'AND B.ID_PERIODO = C.ID_PERIODO    '#13+
-                          'AND a.ID_CURSO = ' + Format('%s', [vCurso.getCampoFromListaValores(0)]));
+    vConsulta.setTextosql('select a.id_materia  ''codigo'','#13+
+                          '       b.nome      ''nome'','#13+
+                          '       c.periodo    ''periodo'' '#13+
+                          'from curso_materia a, materia b,'#13+
+                          '     periodo c              '#13+
+                          'where a.id_materia = b.id_materia  '#13+
+                          'and b.id_periodo = c.id_periodo    '#13+
+                          'and a.id_curso = ' + Format('%s', [vCurso.getCampoFromListaValores(0)]));
 
     vConsulta.getConsultaToSg(gridMaterias);
     vUtilitario.ajustaTamnhosg(gridMaterias);
@@ -124,7 +124,7 @@ begin
              if (vCurso.isExiteSlvalores) then
                begin
                     edNome.Text := vCurso.getCampoFromListaValores(1);
-                    cbStatus.ItemIndex := StrToInt(vCurso.getCampoFromListaValores(2));
+                    cbStatus.ItemIndex := StrToInt(vCurso.getCampoFromListaValores(2)) + 1;
                     vCurso.estado := 1;
 
                     vConsulta.setTextosql('select * '+#13+
@@ -203,14 +203,14 @@ begin
  if (vCurso.getEstado = 1) then
    begin
      vCurso.slValores.Strings[1] := edNome.Text;
-     vCurso.slValores.Strings[2] := IntToStr(cbStatus.ItemIndex) ;
+     vCurso.slValores.Strings[2] := IntToStr(cbStatus.ItemIndex - 1);
    end
  else
    begin
      vCurso.slValores.Clear;
      vCurso.slValores.Add('0');
      vCurso.slValores.Add(edNome.Text);
-     vCurso.slValores.Add(IntToStr(cbStatus.ItemIndex + 1));
+     vCurso.slValores.Add(IntToStr(cbStatus.ItemIndex - 1));
    end;
 
  vCurso.insert(vCurso.slValores);

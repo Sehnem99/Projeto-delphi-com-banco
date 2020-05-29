@@ -136,15 +136,19 @@ var
 begin
   vConsulta := TConsulta.create;
   try
+
     vConsulta.setTitulo('Consulta Materia');
     vConsulta.setTextosql('select m.id_materia ''Código'',' +
                           '       m.nome ''Nome'',' +
                           '       m.id_periodo ''Codigo Periodo'','+
-                          '       p.periodo ''Nome do Periodo'','+
-                          '       cm.id_curso_materia ''Codigo Curso Materia'''+
-                          '  from materia m,periodo p, curso_materia cm,'+
+                          '       p.periodo ''Nome do Periodo'''+
+                          '       m.id_professor ''Codigo Professor'''+
+                          '       pe.nome ''Nome Professor'''+
+                          '  from materia m,periodo p, curso_materia cm, professor pr, pessoa pe'+
                           ' where m.id_periodo = p.id_periodo'+
                           '   and m.id_materia = cm.id_Materia'+
+                          '   and m.ID_PROFESSOR = pr.ID_PROFESSOR'+
+                          '   and pr.ID_PESSOA = pe.ID_PESSOA'+
                           '   and cm.id_curso = '+ Format('%s',[IntToStr(FID_Curso)])+
                           ' order by Nome');
     vConsulta.getConsulta;
@@ -155,8 +159,17 @@ begin
 
              if (vMateria.isExiteSlvalores) then
                begin
-                 cbPeriodo.ItemIndex := StrToInt(vMateria.getCampoFromListaValores(1));
-                 edNome.Text := vMateria.getCampoFromListaValores(2);
+                 edNome.Text := vMateria.getCampoFromListaValores(3);
+
+                 cbPeriodo.ItemIndex :=  Integer(cbPeriodo.Items.Objects[
+                                         StrToInt(vMateria.getCampoFromListaValores(1))]);
+
+                 cbProfessor.ItemIndex := Integer(cbProfessor.Items.Objects[
+                                          StrToInt(vMateria.getCampoFromListaValores(2))]);
+
+
+
+
                  vMateria.estado := 1;
 
                  vConsulta.setTextosql('select * '+#13+
@@ -178,7 +191,8 @@ begin
                  vMateria.estado := 0;
                  vCadCurso_Materia.estado := vMateria.estado;
                  edNome.Text := '';
-                 cbPeriodo.ItemIndex := -1;
+                 cbPeriodo.ItemIndex := 1;
+                 cbProfessor.ItemIndex := 1;
                end;
        end;
 
@@ -210,8 +224,10 @@ procedure TForm_CadMateria.sbtnSalvarClick(Sender: TObject);
 begin
   if (vMateria.getEstado = 1) then
    begin
-     vMateria.slValores.Strings[1] := edNome.Text;
-     vMateria.slValores.Strings[2] := IntToStr(Integer(cbPeriodo.Items.Objects[cbPeriodo.ItemIndex]));
+     vMateria.slValores.Strings[1] := IntToStr(Integer(cbPeriodo.Items.Objects[cbPeriodo.ItemIndex]));
+     vMateria.slValores.Strings[2] := IntToStr(Integer(cbProfessor.Items.Objects[cbProfessor.ItemIndex]));
+     vMateria.slValores.Strings[3] := edNome.Text;
+
    end
  else
    begin

@@ -23,7 +23,8 @@ uses
   unit_CadMateria in '..\Units\unit_CadMateria.pas' {form_CadMateria},
   Materia in '..\Classes\Materia.pas',
   unit_CadContato in '..\Units\unit_CadContato.pas' {form_CadContato},
-  Contato in '..\Classes\Contato.pas';
+  Contato in '..\Classes\Contato.pas',
+  unit_Relatorio in '..\Units\unit_Relatorio.pas' {frm_Relatorio};
 
 {$R *.res}
 
@@ -31,7 +32,5 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm_BancoDados, dm_BancoDados);
   Application.CreateForm(Tform_Principal, form_Principal);
-  Application.CreateForm(Tform_CadMateria, form_CadMateria);
-  Application.CreateForm(Tform_CadContato, form_CadContato);
   Application.Run;
 end.

@@ -11,6 +11,7 @@ uses System.SysUtils
    , FMX.Types
    , FMX.Controls
    , FMX.Forms
+   , FMX.Objects
    , FMX.Graphics
    , FMX.Dialogs
    , FMX.StdCtrls
@@ -24,7 +25,8 @@ uses System.SysUtils
    , Turma
    , Curso
    , Cadastro
-   , FireDAC.Comp.Client;
+   , Data.DB
+   , Datasnap.DBClient;
 {$ENDREGION}
 
 type
@@ -42,14 +44,15 @@ type
     sbtnBusca: TSpeedButton;
     sbtnNovo: TSpeedButton;
     sbtnExcluir: TSpeedButton;
-    IgFotoPerfil: TImageControl;
-    Label2: TLabel;
     Label4: TLabel;
     edMatricula: TEdit;
     cbTurma: TComboBox;
     lbTurma: TLabel;
     lbCurso: TLabel;
     cbCurso: TComboBox;
+    imgFotoPerfil: TImage;
+    btnAddFoto: TButton;
+    odFotoPerfil: TOpenDialog;
     procedure edCpfExit(Sender: TObject);
     procedure sbtnSalvarClick(Sender: TObject);
     procedure sbtnBuscaClick(Sender: TObject);
@@ -58,6 +61,7 @@ type
     procedure sbtnNovoClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbTipoChange(Sender: TObject);
+    procedure btnAddFotoClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -81,13 +85,23 @@ var
   vCurso         : TCurso;
   vAluno_Turma   : TAluno_Turma;
   vAluno_Turma_Materia : TAluno_Turma_Materia;
-  FCadastro      : TCadastro;
+  vFoto                : TCadastro;
+  FCadastro            : TCadastro;
 
 implementation
 
 {$R *.fmx}
 
 uses unit_BancoDados, Consulta;
+
+procedure TForm_CadPessoa.btnAddFotoClick(Sender: TObject);
+begin
+  if (odFotoPerfil.Execute) then
+      begin
+        imgFotoPerfil.Bitmap.LoadFromFile(odFotoPerfil.FileName);
+        imgFotoPerfil.Tag := 0;
+      end;
+end;
 
 procedure TForm_CadPessoa.cbTipoChange(Sender: TObject);
 begin
@@ -114,6 +128,7 @@ begin
   vAluno       := TAluno.Create('aluno');
   vAluno_Turma := TAluno_Turma.Create('aluno_turma');
   vAluno_Turma_Materia := TAluno_Turma_Materia.Create('aluno_turma_materia');
+  vFoto                       := TCadastro.Create('foto');
   vPessoa.estado := 0;
   vAluno.estado  := 0;
   vAluno_Turma.estado := 0;
@@ -261,7 +276,7 @@ begin
       end
     else
       begin
-        vAluno_Turma_Materia.deleteItens(vAluno_Turma_Materia.getCampoFromListaValores(0));
+        vAluno_Turma_Materia.deleteAlunoTurmaMateria(vAluno_Turma_Materia.getCampoFromListaValores(3));
 
         vAluno_Turma.slValores.Clear;
         vAluno_Turma.slValores.Add('0');
@@ -352,9 +367,23 @@ begin
                   edCpf.Text := '';
                   dtDataNasc.Date := Date;
                   cbTipo.Index := 0;
-                  cbTurma.Index := 0;
-                  cbCurso.Index := 0;
-                end;
+				  cbTurma.Index := 0;
+				  cbCurso.Index := 0;
+				  end;
+			 
+             if (odFotoPerfil.FileName = '') then
+                 odFotoPerfil.FileName := GetCurrentDir +'\imagem.jpg';
+
+             try
+                 vFoto.getImagem(StrToInt(vPessoa.getCampoFromListaValores(0)), imgFotoPerfil);
+                 imgFotoPerfil.Bitmap.SaveToFile(odFotoPerfil.FileName);
+                 imgFotoPerfil.Repaint;
+             except
+                on e:exception do
+                  begin
+                       imgFotoPerfil.Bitmap := nil;
+                  end;
+             end;
        end;
 
   finally
@@ -368,7 +397,7 @@ begin
       exit
   else
     begin
-      vPessoa.slValores.Strings[4] := '0';
+      vPessoa.slValores.Strings[4] := IntToStr(0);
       vPessoa.insert(vPessoa.slValores);
     end;
 
@@ -403,6 +432,7 @@ begin
       end;
 
   vPessoa.insert(vPessoa.slValores);
+  vFoto.setImgFoto(StrToInt(vPessoa.getCampoFromListaValores(0)), odFotoPerfil.FileName);
 
   if (StrToInt(vPessoa.slValores.Strings[4]) = 1) then
     setCadProfessor(vPessoa.getEstado)

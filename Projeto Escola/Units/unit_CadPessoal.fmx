@@ -25,14 +25,14 @@ object form_CadPessoa: Tform_CadPessoa
     object edNome: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 2
-      Position.X = 274.000000000000000000
+      Position.X = 321.000000000000000000
       Position.Y = 84.000000000000000000
       Size.Width = 190.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
     end
     object lbNome: TLabel
-      Position.X = 225.000000000000000000
+      Position.X = 272.000000000000000000
       Position.Y = 86.000000000000000000
       Size.Width = 40.000000000000000000
       Size.Height = 17.000000000000000000
@@ -41,7 +41,7 @@ object form_CadPessoa: Tform_CadPessoa
       TabOrder = 9
     end
     object lbCPF: TLabel
-      Position.X = 236.000000000000000000
+      Position.X = 283.000000000000000000
       Position.Y = 53.000000000000000000
       Size.Width = 29.000000000000000000
       Size.Height = 21.000000000000000000
@@ -52,7 +52,7 @@ object form_CadPessoa: Tform_CadPessoa
     object edCpf: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 1
-      Position.X = 274.000000000000000000
+      Position.X = 321.000000000000000000
       Position.Y = 53.000000000000000000
       Size.Width = 190.000000000000000000
       Size.Height = 22.000000000000000000
@@ -60,7 +60,7 @@ object form_CadPessoa: Tform_CadPessoa
       OnExit = edCpfExit
     end
     object lbDataNasc: TLabel
-      Position.X = 168.000000000000000000
+      Position.X = 215.000000000000000000
       Position.Y = 117.000000000000000000
       Size.Width = 103.000000000000000000
       Size.Height = 17.000000000000000000
@@ -70,7 +70,7 @@ object form_CadPessoa: Tform_CadPessoa
     end
     object dtDataNasc: TDateEdit
       Date = 43917.000000000000000000
-      Position.X = 274.000000000000000000
+      Position.X = 321.000000000000000000
       Position.Y = 115.000000000000000000
       Size.Width = 114.000000000000000000
       Size.Height = 22.000000000000000000
@@ -78,7 +78,7 @@ object form_CadPessoa: Tform_CadPessoa
       TabOrder = 3
     end
     object lbTipo: TLabel
-      Position.X = 236.000000000000000000
+      Position.X = 283.000000000000000000
       Position.Y = 148.000000000000000000
       Size.Width = 34.000000000000000000
       Size.Height = 17.000000000000000000
@@ -92,7 +92,7 @@ object form_CadPessoa: Tform_CadPessoa
         'Professor'
         'Aluno')
       ItemIndex = 0
-      Position.X = 275.000000000000000000
+      Position.X = 322.000000000000000000
       Position.Y = 146.000000000000000000
       Size.Width = 189.000000000000000000
       Size.Height = 22.000000000000000000
@@ -103,9 +103,9 @@ object form_CadPessoa: Tform_CadPessoa
     object sbtnSalvar: TSpeedButton
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 2
-      Position.X = 282.000000000000000000
-      Position.Y = 209.000000000000000000
+      ImageIndex = 4
+      Position.X = 357.000000000000000000
+      Position.Y = 242.000000000000000000
       Size.Width = 63.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
@@ -116,8 +116,8 @@ object form_CadPessoa: Tform_CadPessoa
     end
     object sbtnBusca: TSpeedButton
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 1
-      Position.X = 463.000000000000000000
+      ImageIndex = 0
+      Position.X = 510.000000000000000000
       Position.Y = 53.000000000000000000
       Size.Width = 35.000000000000000000
       Size.Height = 22.000000000000000000
@@ -129,9 +129,9 @@ object form_CadPessoa: Tform_CadPessoa
     object sbtnNovo: TSpeedButton
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 0
-      Position.X = 204.000000000000000000
-      Position.Y = 209.000000000000000000
+      ImageIndex = 3
+      Position.X = 279.000000000000000000
+      Position.Y = 242.000000000000000000
       Size.Width = 57.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
@@ -143,9 +143,9 @@ object form_CadPessoa: Tform_CadPessoa
     object sbtnExcluir: TSpeedButton
       StyledSettings = [Family, Style, FontColor]
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 0
-      Position.X = 367.000000000000000000
-      Position.Y = 209.000000000000000000
+      ImageIndex = 5
+      Position.X = 442.000000000000000000
+      Position.Y = 242.000000000000000000
       Size.Width = 66.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
@@ -154,27 +154,8 @@ object form_CadPessoa: Tform_CadPessoa
       TextSettings.HorzAlign = Leading
       OnClick = sbtnExcluirClick
     end
-    object IgFotoPerfil: TImageControl
-      StyleName = 'sadasdasd'
-      Anchors = [akLeft, akTop, akRight, akBottom]
-      Cursor = crHandPoint
-      HelpType = htKeyword
-      Position.X = 56.000000000000000000
-      Position.Y = 18.000000000000000000
-      Size.Width = 99.000000000000000000
-      Size.Height = 111.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 13
-    end
-    object Label2: TLabel
-      Position.X = 48.000000000000000000
-      Position.Y = 133.000000000000000000
-      TextSettings.HorzAlign = Center
-      Text = 'Foto de perfil'
-      TabOrder = 14
-    end
     object Label4: TLabel
-      Position.X = 207.000000000000000000
+      Position.X = 254.000000000000000000
       Position.Y = 22.000000000000000000
       Size.Width = 57.000000000000000000
       Size.Height = 21.000000000000000000
@@ -185,7 +166,7 @@ object form_CadPessoa: Tform_CadPessoa
     object edMatricula: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 0
-      Position.X = 274.000000000000000000
+      Position.X = 321.000000000000000000
       Position.Y = 22.000000000000000000
       Enabled = False
       Size.Width = 113.000000000000000000
@@ -193,21 +174,42 @@ object form_CadPessoa: Tform_CadPessoa
       Size.PlatformDefault = False
       OnExit = edCpfExit
     end
+    object imgFotoPerfil: TImage
+      MultiResBitmap = <
+        item
+        end>
+      MarginWrapMode = Fit
+      Position.X = 58.000000000000000000
+      Position.Y = 20.000000000000000000
+      Size.Width = 99.000000000000000000
+      Size.Height = 111.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object btnAddFoto: TButton
+      Position.X = 57.000000000000000000
+      Position.Y = 136.000000000000000000
+      Size.Width = 101.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 14
+      Text = 'Carregar Foto'
+      OnClick = btnAddFotoClick
+    end
   end
   object cbTurma: TComboBox
     Items.Strings = (
       'Selecione a turma')
     ItemIndex = 0
-    Position.X = 376.000000000000000000
-    Position.Y = 198.000000000000000000
+    Position.X = 325.000000000000000000
+    Position.Y = 230.000000000000000000
     Size.Width = 188.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 4
   end
   object lbTurma: TLabel
-    Position.X = 327.000000000000000000
-    Position.Y = 200.000000000000000000
+    Position.X = 276.000000000000000000
+    Position.Y = 232.000000000000000000
     Size.Width = 42.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -215,8 +217,8 @@ object form_CadPessoa: Tform_CadPessoa
     TabOrder = 3
   end
   object lbCurso: TLabel
-    Position.X = 82.000000000000000000
-    Position.Y = 198.000000000000000000
+    Position.X = 278.000000000000000000
+    Position.Y = 200.000000000000000000
     Size.Width = 50.000000000000000000
     Size.Height = 17.000000000000000000
     Size.PlatformDefault = False
@@ -227,11 +229,15 @@ object form_CadPessoa: Tform_CadPessoa
     Items.Strings = (
       'Selecione o curso')
     ItemIndex = 0
-    Position.X = 128.000000000000000000
-    Position.Y = 196.000000000000000000
-    Size.Width = 188.000000000000000000
+    Position.X = 324.000000000000000000
+    Position.Y = 198.000000000000000000
+    Size.Width = 189.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
+  end
+  object odFotoPerfil: TOpenDialog
+    Left = 96
+    Top = 76
   end
 end

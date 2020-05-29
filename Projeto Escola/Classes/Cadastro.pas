@@ -2,7 +2,8 @@ unit Cadastro;
 
 interface
 uses
-    system.SysUtils, system.Classes, FireDAC.Comp.Client, unit_BancoDados, utilitario;
+    system.SysUtils, system.Classes, FireDAC.Comp.Client, unit_BancoDados,
+    utilitario, Vcl.imaging.jpeg, Data.DB, FMX.Objects;
 
 type TCadastro = class
    private
@@ -36,7 +37,9 @@ type TCadastro = class
      procedure insertAlunoTurmaMateria(pCodigoCurso:String; var slDados:TStringList);
      procedure select(icampo:integer; svalor:string);
      procedure delete;
-     procedure deleteItens(ID:String);
+     procedure deleteAlunoTurmaMateria(vIDCurso:String);
+     procedure getImagem(icod:Integer; imagem:TImage);
+     procedure setImgFoto(iCodPessoa: Integer; sCaminho: string);
 end;
 
 
@@ -133,6 +136,33 @@ begin
   end;
 
 
+end;
+
+procedure TCadastro.getImagem(icod: Integer; imagem: TImage);
+var
+  logo: TStream;
+begin
+  qrCadastro.Close;
+  qrCadastro.SQL.Clear;
+  qrCadastro.SQL.Add('select foto ');
+  qrCadastro.SQL.Add('from foto ');
+  qrCadastro.SQL.Add(Format('where (id_pessoa = %d)',[icod]));
+
+  try
+     qrCadastro.Open;
+
+     if (not qrCadastro.IsEmpty) then
+       begin
+            logo := qrCadastro.CreateBlobStream(qrCadastro.Fields[0], bmRead);
+            imagem.Bitmap.LoadFromStream(logo);
+            logo.Free;
+       end;
+  except
+      on e:exception do
+         begin
+              raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);
+         end;
+  end;
 end;
 
 function TCadastro.getTabela: String;
@@ -288,6 +318,64 @@ begin
      end;
 end;
 
+procedure TCadastro.setImgFoto(iCodPessoa: Integer; sCaminho: string);
+var
+   img: TStream;
+   iCodImg:Integer;
+   iTipo:Byte;
+begin
+     qrCadastro.Close;
+     qrCadastro.SQL.Clear;
+     qrCadastro.SQL.Add(format('Select id_foto from foto where (id_pessoa = %d)', [iCodPessoa]));
+     try
+        qrCadastro.Open;
+
+        if (not qrCadastro.IsEmpty) then
+          begin
+               iCodImg := qrCadastro.Fields[0].AsInteger;
+               iTipo := 2;
+          end
+          else
+              iTipo:= 1;
+     except
+           iTipo := 1;
+     end;
+
+     if (sCaminho <> '') then
+       img := TFileStream.Create(sCaminho, fmOpenRead);
+
+     qrCadastro.Close;
+     qrCadastro.SQL.Clear;
+
+     if (iTipo = 1) then
+       begin
+            qrCadastro.SQL.Add('insert into foto values  ');
+            qrCadastro.SQL.Add('(0, :pessoa, :imagem) ');
+
+            qrCadastro.Params[0].AsInteger := iCodPessoa;
+            qrCadastro.Params[1].LoadFromStream(img, ftBlob);
+       end
+     else
+     if (iTipo = 2) then
+       begin
+            qrCadastro.SQL.Add('update foto   ');
+            qrCadastro.SQL.Add('set foto = :foto where (id_foto = :id_foto) ');
+
+            qrCadastro.Params[0].LoadFromStream(img, ftBlob);
+            qrCadastro.Params[1].AsInteger := iCodImg;
+         end;
+
+     try
+        qrCadastro.ExecSQL;
+     except
+           on e:exception do
+              raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);
+     end;
+
+     if (sCaminho <> '') then
+       img.Free;
+end;
+
 procedure TCadastro.delete;
 begin
      qrCadastro.Close;
@@ -303,20 +391,9 @@ begin
      end;
 end;
 
-procedure TCadastro.deleteItens(ID:String);
+procedure TCadastro.deleteAlunoTurmaMateria(vIDCurso: String);
 begin
-   qrCadastro.Close;
-   qrCadastro.SQL.Clear;
-   qrCadastro.SQL.Add(Format('delete from %s where (%s = :valor)', [self.getTabela, self.getCampoFromLista(0)]));
-   qrCadastro.Params[0].Value := ID;
-
-   try
-      qrCadastro.ExecSQL;
-   except
-        on E:Exception do
-          raise Exception.CreateFmt('Não foi possível executar operação no Banco.' + #10#13 + '%s', [E.Message]);
-   end;
-
+//
 end;
 
 end.

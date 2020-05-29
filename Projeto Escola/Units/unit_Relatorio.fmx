@@ -1,0 +1,47 @@
+object frm_Relatorio: Tfrm_Relatorio
+  Left = 0
+  Top = 0
+  Caption = 'Relat'#243'rios'
+  ClientHeight = 523
+  ClientWidth = 774
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 761.000000000000000000
+    Size.Height = 217.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object spQtdeCurso: TSpeedButton
+      Position.X = 32.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 241.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Quantidade de alunos por curso'
+    end
+    object spQtdeMateria: TSpeedButton
+      Position.X = 416.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 241.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Quantidade de alunos por mat'#233'ria'
+    end
+  end
+  object StringGrid1: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 8.000000000000000000
+    Position.Y = 240.000000000000000000
+    Size.Width = 761.000000000000000000
+    Size.Height = 281.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 757.000000000000000000
+    Viewport.Height = 256.000000000000000000
+  end
+end
