@@ -183,9 +183,6 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="..\Classes\Materia.pas"/>
-        <DCCReference Include="..\Units\unit_CadContato.pas">
-            <Form>form_CadContato</Form>
-        </DCCReference>
         <DCCReference Include="..\Classes\Contato.pas"/>
         <DCCReference Include="..\Units\unit_Relatorio.pas">
             <Form>frm_Relatorio</Form>

@@ -60,9 +60,7 @@ uses unit_BancoDados
    , unit_CadPessoal
    , unit_CadMateria
    , unit_CadPeriodo
-   , unit_CadContato
-   , unit_Chamada
-   ;
+   , unit_Chamada;
 
 procedure Tform_Principal.MenuItem3Click(Sender: TObject);
 var

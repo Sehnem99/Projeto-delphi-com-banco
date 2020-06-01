@@ -130,8 +130,8 @@ object Form_CadCurso: TForm_CadCurso
       Size.PlatformDefault = False
       TabOrder = 0
       Options = [ColumnResize, ColumnMove, ColLines, RowLines, Tabs, Header, HeaderClick, AutoDisplacement]
-      Viewport.Width = 565.000000000000000000
-      Viewport.Height = 280.000000000000000000
+      Viewport.Width = 569.000000000000000000
+      Viewport.Height = 305.000000000000000000
     end
     object sbtnAdcExclMateria: TSpeedButton
       StyledSettings = [Family, Style, FontColor]

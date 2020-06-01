@@ -241,6 +241,7 @@ begin
  vMateria.insert(vMateria.slValores);
  vMateria.utilitario.LimpaTela(self);
  getCadCursoMateria;
+ vMateria.estado := 0;
  edNome.SetFocus;
 end;
 

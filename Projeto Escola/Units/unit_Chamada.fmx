@@ -11,6 +11,7 @@ object form_Chamada: Tform_Chamada
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object pnInferior: TPanel
     Align = Bottom
@@ -22,7 +23,7 @@ object form_Chamada: Tform_Chamada
     object btnRegistrarDiario: TButton
       Anchors = []
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 2
+      ImageIndex = 4
       Position.X = 265.000000000000000000
       Position.Y = 13.000000000000000000
       Size.Width = 120.000000000000000000
@@ -30,6 +31,7 @@ object form_Chamada: Tform_Chamada
       Size.PlatformDefault = False
       TabOrder = 0
       Text = 'Registrar Di'#225'rio'
+      OnClick = btnRegistrarDiarioClick
     end
   end
   object pnPrincipal: TPanel
@@ -47,8 +49,8 @@ object form_Chamada: Tform_Chamada
       Size.PlatformDefault = False
       TabOrder = 0
       Options = [Editing, ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick, AutoDisplacement]
-      Viewport.Width = 650.000000000000000000
-      Viewport.Height = 287.000000000000000000
+      Viewport.Width = 646.000000000000000000
+      Viewport.Height = 262.000000000000000000
     end
   end
   object pnSuperior: TPanel
@@ -64,11 +66,11 @@ object form_Chamada: Tform_Chamada
         'Selecione a turma')
       ItemIndex = 0
       Position.X = 111.000000000000000000
-      Position.Y = 26.000000000000000000
+      Position.Y = 41.000000000000000000
       Size.Width = 189.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 5
+      TabOrder = 3
     end
     object cbMateria: TComboBox
       Anchors = []
@@ -76,26 +78,26 @@ object form_Chamada: Tform_Chamada
         'Selecione a mat'#233'ria')
       ItemIndex = 0
       Position.X = 369.000000000000000000
-      Position.Y = 26.000000000000000000
+      Position.Y = 41.000000000000000000
       Size.Width = 189.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 6
+      TabOrder = 4
     end
     object lbTurma: TLabel
       Anchors = [akRight]
       Position.X = 64.000000000000000000
-      Position.Y = 29.000000000000000000
+      Position.Y = 44.000000000000000000
       Size.Width = 43.000000000000000000
       Size.Height = 17.000000000000000000
       Size.PlatformDefault = False
       Text = 'Turma:'
-      TabOrder = 4
+      TabOrder = 2
     end
     object lbMateria: TLabel
       Anchors = [akRight]
       Position.X = 315.000000000000000000
-      Position.Y = 29.000000000000000000
+      Position.Y = 44.000000000000000000
       Size.Width = 51.000000000000000000
       Size.Height = 17.000000000000000000
       Size.PlatformDefault = False
@@ -104,51 +106,13 @@ object form_Chamada: Tform_Chamada
     end
     object sbConsulta: TSpeedButton
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 1
+      ImageIndex = 0
       Position.X = 561.000000000000000000
-      Position.Y = 64.000000000000000000
+      Position.Y = 41.000000000000000000
       Size.Width = 27.000000000000000000
       Size.Height = 23.000000000000000000
       Size.PlatformDefault = False
       OnClick = sbConsultaClick
-    end
-    object dtInicio: TDateEdit
-      Date = 43973.000000000000000000
-      Position.X = 111.000000000000000000
-      Position.Y = 64.000000000000000000
-      Size.Width = 190.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 8
-    end
-    object dtFim: TDateEdit
-      Date = 43973.000000000000000000
-      Position.X = 369.000000000000000000
-      Position.Y = 64.000000000000000000
-      Size.Width = 190.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 7
-    end
-    object lbDtInicio: TLabel
-      Anchors = [akRight]
-      Position.X = 41.000000000000000000
-      Position.Y = 66.000000000000000000
-      Size.Width = 69.000000000000000000
-      Size.Height = 17.000000000000000000
-      Size.PlatformDefault = False
-      Text = 'Data In'#237'cio: '
-      TabOrder = 3
-    end
-    object lbDtFim: TLabel
-      Anchors = [akRight]
-      Position.X = 310.000000000000000000
-      Position.Y = 66.000000000000000000
-      Size.Width = 60.000000000000000000
-      Size.Height = 17.000000000000000000
-      Size.PlatformDefault = False
-      Text = 'Data Fim:'
-      TabOrder = 2
     end
   end
 end

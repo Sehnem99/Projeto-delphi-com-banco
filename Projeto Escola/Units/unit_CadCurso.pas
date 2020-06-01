@@ -113,8 +113,8 @@ begin
   try
     vConsulta.setTitulo('Consulta Cursos');
     vConsulta.setTextosql('Select id_curso ''Código'',' +
-                          'Nome Nome, c.c.Ativo ''Cod Status'', IF(c.Ativo = 1, ''Ativo'', ''Inativo'')as ''Status'' '+
-                          'from curso c, periodo p   '+
+                          'Nome Nome, c.Ativo ''Cod Status'', IF(c.Ativo = 1, ''Ativo'', ''Inativo'')as ''Status'' '+
+                          'from curso c   '+
                           ' order by nome');
     vConsulta.getConsulta;
 
@@ -134,8 +134,9 @@ begin
                   edNome.Text := '';
                   cbStatus.ItemIndex := -1;
                end;
+         CaregaStringGrid(StrToInt(vCurso.getCampoFromListaValores(0)));
        end;
-     CaregaStringGrid(StrToInt(vCurso.getCampoFromListaValores(0)));
+
   finally
     FreeAndNil(vConsulta);
   end;

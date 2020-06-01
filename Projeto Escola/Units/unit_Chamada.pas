@@ -40,15 +40,13 @@ type
     lbTurma: TLabel;
     lbMateria: TLabel;
     sbConsulta: TSpeedButton;
-    dtInicio: TDateEdit;
-    dtFim: TDateEdit;
-    lbDtInicio: TLabel;
-    lbDtFim: TLabel;
     procedure sbConsultaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnRegistrarDiarioClick(Sender: TObject);
   private
     { Private declarations }
-    procedure CaregaStringGrid(vCodTurma, vCodMateria: Integer);
+    procedure CaregaStringGrid;
 
   public
     { Public declarations }
@@ -73,6 +71,8 @@ var
   vConsulta : TConsulta;
 begin
   vConsulta := TConsulta.create;
+  vTurma    := TTurma.Create('turma');
+  vMateria  := TMateria.Create('materia');
   try
     vConsulta.setTextosql('Select * from turma');
     vConsulta.getCarregaCB('turma','descricao',cbTurma);
@@ -84,68 +84,57 @@ begin
   end;
 end;
 
-procedure Tform_Chamada.CaregaStringGrid(vCodTurma, vCodMateria: Integer);
-var
-  i : Integer;
-  aluno_diario : TFDQuery;
-  utilitario   : TUtilitario;
+procedure Tform_Chamada.FormDestroy(Sender: TObject);
 begin
-  utilitario := TUtilitario.Create;
+  FreeAndNil(vTurma);
+  FreeAndNil(vMateria);
+end;
 
-  aluno_diario := TFDQuery.Create(nil);
-  aluno_diario.Connection := dm_BancoDados.FDEscola;
-  aluno_diario.Close;
-  aluno_diario.SQL.Clear;
-  aluno_diario.SQL.Add('  select *');
-  aluno_diario.SQL.Add('    from aluno a');
-  aluno_diario.SQL.Add('   inner join aluno_turma b');
-  aluno_diario.SQL.Add('      on a.ID_ALUNO = b.ID_ALUNO');
-  aluno_diario.SQL.Add('   inner join aluno_turma_materia c');
-  aluno_diario.SQL.Add('      on b.ID_ALUNO_TURMA = c.ID_ALUNO_TURMA');
-  aluno_diario.SQL.Add('   inner join materia d');
-  aluno_diario.SQL.Add('      on c.ID_MATERIA = d.ID_MATERIA');
-  aluno_diario.SQL.Add('   inner join turma e');
-  aluno_diario.SQL.Add('      on b.ID_TURMA = e.ID_TURMA');
-  aluno_diario.SQL.Add('   inner join pessoa f');
-  aluno_diario.SQL.Add('      on a.ID_PESSOA = f.ID_PESSOA');
-  aluno_diario.SQL.Add('   where e.ID_TURMA    = ' + IntToStr(Integer((cbTurma.Items.Objects[cbTurma.ItemIndex]))) +
-                       '      and d.ID_MATERIA = ' + IntToStr(Integer((cbMateria.Items.Objects[cbMateria.ItemIndex]))));
+procedure Tform_Chamada.btnRegistrarDiarioClick(Sender: TObject);
+begin
+  //Inserir na tabela diário.
+end;
+
+procedure Tform_Chamada.CaregaStringGrid;
+var
+  vConsulta : TConsulta;
+
+begin
+  vConsulta := TConsulta.create;
+
   try
-    aluno_diario.Open;
+    sgChamada.ClearColumns;
+    vConsulta.setTextosql('select a.ID_ALUNO ''Matrícula''' +
+                          '     , f.NOME ''Nome do Aluno''' +
+                          '     , g.DATA ''Data''' +
+                          '     , g.QTDE_AULAS_DIA ''Qtde de Aulas''' +
+                          '     , g.QTDE_FALTAS ''Qtde de Faltas''' +
+                          '  from aluno a' +
+                          ' inner join aluno_turma b' +
+                          '    on a.ID_ALUNO = b.ID_ALUNO' +
+                          ' inner join aluno_turma_materia c' +
+                          '    on b.ID_ALUNO_TURMA = c.ID_ALUNO_TURMA' +
+                          ' inner join materia d' +
+                          '    on c.ID_MATERIA = d.ID_MATERIA' +
+                          ' inner join turma e' +
+                          '    on b.ID_TURMA = e.ID_TURMA' +
+                          ' inner join pessoa f' +
+                          '    on a.ID_PESSOA = f.ID_PESSOA' +
+                          '  left join diario g' +
+	                         '    on c.ID_ALUNO_TURMA = g.ID_TURMA_MATERIA' +
+                          ' where e.ID_TURMA = ' + IntToStr(Integer(cbTurma.Items.Objects[cbTurma.ItemIndex])) +
+                          '   and d.ID_MATERIA = ' + IntToStr(Integer(cbMateria.Items.Objects[cbMateria.ItemIndex])));
 
-    if aluno_diario.IsEmpty then
-       ShowMessage('Não há registros para esse filtro.');
-
-    while not aluno_diario.Eof do
-      begin
-        utilitario.LimpaStringGrid(sgChamada);
-        aluno_diario.First;
-
-        while (not aluno_diario.Eof) do
-          begin
-           if (sgChamada.Cells[0,0] <> '') then
-             sgChamada.RowCount := sgChamada.RowCount + 1;
-
-           for i := 0 to aluno_diario.FieldCount -1 do
-             sgChamada.Cells[i, sgChamada.RowCount -1] := aluno_diario.Fields[i].AsString;
-
-              // sgChamada.Cells[aluno_diario.FieldCount, sgChamada.RowCount -1] := self.calculaFrequenciaGeral(StrToInt(dias_uteis_turma), aluno_diario.FieldByName('QTDE_FALTAS').AsInteger);
-
-            aluno_diario.Next;
-          end;
-      end;
-  except
-    on e:exception do
-      begin
-        ShowMessage('Comando SQL não executado: ' + e.ToString);
-        exit;
-      end;
+    vConsulta.getConsultaToSg(sgChamada);
+    vUtilitario.ajustaTamnhosg(sgChamada);
+  finally
+    FreeAndNil(vConsulta);
   end;
 end;
 
 procedure Tform_Chamada.sbConsultaClick(Sender: TObject);
 begin
-  CaregaStringGrid(cbTurma.ItemIndex, cbMateria.ItemIndex);
+  CaregaStringGrid;
 end;
 
 end.

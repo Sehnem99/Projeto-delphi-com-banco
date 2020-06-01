@@ -22,7 +22,6 @@ uses
   Turma in '..\Classes\Turma.pas',
   unit_CadMateria in '..\Units\unit_CadMateria.pas' {form_CadMateria},
   Materia in '..\Classes\Materia.pas',
-  unit_CadContato in '..\Units\unit_CadContato.pas' {form_CadContato},
   Contato in '..\Classes\Contato.pas',
   unit_Relatorio in '..\Units\unit_Relatorio.pas' {frm_Relatorio};
 
