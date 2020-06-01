@@ -26,7 +26,8 @@ uses System.SysUtils
    , Curso
    , Cadastro
    , Data.DB
-   , Datasnap.DBClient;
+   , Datasnap.DBClient
+   , Contato;
 {$ENDREGION}
 
 type
@@ -53,6 +54,16 @@ type
     imgFotoPerfil: TImage;
     btnAddFoto: TButton;
     odFotoPerfil: TOpenDialog;
+    Panel1: TPanel;
+    lbEmail: TLabel;
+    edEmail: TEdit;
+    lbTelefone: TLabel;
+    edTelefone: TEdit;
+    lbCelular: TLabel;
+    edCelular: TEdit;
+    edDDDCel: TEdit;
+    edDDDTel: TEdit;
+    Panel2: TPanel;
     procedure edCpfExit(Sender: TObject);
     procedure sbtnSalvarClick(Sender: TObject);
     procedure sbtnBuscaClick(Sender: TObject);
@@ -69,6 +80,8 @@ type
     { Public declarations }
     procedure setCadAluno(sEstado:Integer);
     procedure setCadProfessor(sEstado:Integer);
+    procedure setContato(sEstado:Integer);
+    procedure getContato(pIdPessoa: String);
     procedure getCadAluno(pIdPessoa:String);
     procedure getCadAlunoTurma(pIdAluno:String);
     procedure getCadAlunoTurmaMateria(pIdAlunoTurma:String);
@@ -87,6 +100,7 @@ var
   vAluno_Turma_Materia : TAluno_Turma_Materia;
   vFoto                : TCadastro;
   FCadastro            : TCadastro;
+  vContato             : TContato;
 
 implementation
 
@@ -121,6 +135,7 @@ var
   vConsulta : TConsulta;
 begin
   vPessoa := TPessoa.Create('pessoa');
+  vContato := TContato.Create('contato');
 
   vProfessor := TProfessor.Create('professor');
   vProfessor.estado := 0;
@@ -130,6 +145,7 @@ begin
   vAluno_Turma_Materia := TAluno_Turma_Materia.Create('aluno_turma_materia');
   vFoto                       := TCadastro.Create('foto');
   vPessoa.estado := 0;
+  vContato.estado := 0;
   vAluno.estado  := 0;
   vAluno_Turma.estado := 0;
   vAluno_Turma_Materia.estado := 0;
@@ -148,11 +164,12 @@ end;
 procedure Tform_CadPessoa.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(vPessoa);
+  FreeAndNil(vContato);
   FreeAndNil(vTurma);
   FreeAndNil(vCurso);
   FreeAndNil(vAluno);
   FreeAndNil(vAluno_Turma);
-  FreeAndNil(vAluno_Turma_Materia)
+  FreeAndNil(vAluno_Turma_Materia);
 end;
 
 procedure TForm_CadPessoa.getCadAluno(pIdPessoa: String);
@@ -242,6 +259,32 @@ begin
   end;
 end;
 
+procedure TForm_CadPessoa.getContato(pIdPessoa: String);
+var
+  vConsulta : TConsulta;
+begin
+  vConsulta := TConsulta.create;
+  try
+    vConsulta.setTextosql('select * '+#13+
+                          '  from contato'+#13+
+                          ' where ID_PESSOA = '+
+                          Format('%s', [pIdPessoa]));
+
+
+    vContato.slCampos.Clear;
+    vContato.slCampos.Add('ID_CONTATO');
+    vContato.slCampos.Add('ID_PESSOA');
+    vContato.slCampos.Add('EMAIL');
+    vContato.slCampos.Add('DDDTEL');
+    vContato.slCampos.Add('TELEFONE');
+    vContato.slCampos.Add('DDDCEL');
+    vContato.slCampos.Add('CELULAR');
+    vContato.slValores := vConsulta.getConsultaDados(vContato.slCampos);
+  finally
+    FreeAndNil(vConsulta);
+  end;
+end;
+
 procedure Tform_CadPessoa.habilitaTurmaCurso(ativo:Boolean);
 begin
   lbCurso.Visible := not ativo;
@@ -317,6 +360,34 @@ begin
   end;
 end;
 
+procedure TForm_CadPessoa.setContato(sEstado: Integer);
+begin
+  vContato.estado := sEstado;
+  if (vContato.getEstado = 1) then
+      begin
+        vContato.slValores.Strings[1] := vPessoa.getCampoFromListaValores(0);
+        vContato.slValores.Strings[2] := edEmail.Text;
+        vContato.slValores.Strings[3] := edDDDTel.Text;
+        vContato.slValores.Strings[4] := edTelefone.Text;
+        vContato.slValores.Strings[5] := edDDDCel.Text;
+        vContato.slValores.Strings[6] := edCelular.Text;
+      end
+  else
+      begin
+        vContato.slValores.Clear;
+        vContato.slValores.Add('0');
+        vContato.slValores.Add(vPessoa.getCampoFromListaValores(0));
+        vContato.slValores.Add(edEmail.Text);
+        vContato.slValores.Add(edDDDTel.Text);
+        vContato.slValores.Add(edTelefone.Text);
+        vContato.slValores.Add(edDDDCel.Text);
+        vContato.slValores.Add(edCelular.Text);
+      end;
+
+  vContato.insert(vContato.slValores);
+
+end;
+
 procedure Tform_CadPessoa.sbtnBuscaClick(Sender: TObject);
 var
   vConsulta : TConsulta;
@@ -356,20 +427,21 @@ begin
                       cbTurma.ItemIndex := Integer(cbCurso.Items.Objects[
                                                    StrToInt(vAluno_Turma.getCampoFromListaValores(2))]);
                     end;
+                  getContato(vPessoa.getCampoFromListaValores(0));
+
+                  edEmail.Text    := vContato.getCampoFromListaValores(2);
+                  edDDDTel.Text   := vContato.getCampoFromListaValores(3);
+                  edTelefone.Text := vContato.getCampoFromListaValores(4);
+                  edDDDCel.Text   := vContato.getCampoFromListaValores(5);
+                  edCelular.Text  := vContato.getCampoFromListaValores(6);
 
                   vPessoa.estado   := 1;
                 end
              else
                 begin
                   vPessoa.estado := 0;
-                  edMatricula.Text := '';
-                  edNome.Text := '';
-                  edCpf.Text := '';
-                  dtDataNasc.Date := Date;
-                  cbTipo.Index := 0;
-				  cbTurma.Index := 0;
-				  cbCurso.Index := 0;
-				  end;
+                  vPessoa.utilitario.LimpaTela(self);
+				        end;
 			 
              if (odFotoPerfil.FileName = '') then
                  odFotoPerfil.FileName := GetCurrentDir +'\imagem.jpg';
@@ -397,7 +469,7 @@ begin
       exit
   else
     begin
-      vPessoa.slValores.Strings[4] := IntToStr(0);
+      vPessoa.slValores.Strings[5] := IntToStr(0);
       vPessoa.insert(vPessoa.slValores);
     end;
 
@@ -407,7 +479,7 @@ end;
 procedure Tform_CadPessoa.sbtnNovoClick(Sender: TObject);
 begin
   vPessoa.utilitario.LimpaTela(self);
-  edCpf.SetFocus;
+  edCPF.SetFocus;
   vPessoa.estado := 0;
 end;
 
@@ -419,6 +491,7 @@ begin
         vPessoa.slValores.Strings[2] := edCpf.Text;
         vPessoa.slValores.Strings[3] := DateToStr(dtDataNasc.Date);
         vPessoa.slValores.Strings[4] := IntToStr(cbTipo.ItemIndex);
+        vPessoa.slValores.Strings[5] := IntToStr(0);
       end
   else
       begin
@@ -433,14 +506,16 @@ begin
 
   vPessoa.insert(vPessoa.slValores);
   vFoto.setImgFoto(StrToInt(vPessoa.getCampoFromListaValores(0)), odFotoPerfil.FileName);
+  setContato(vPessoa.getEstado);
 
   if (StrToInt(vPessoa.slValores.Strings[4]) = 1) then
     setCadProfessor(vPessoa.getEstado)
   else
     setCadAluno(vPessoa.getEstado);
 
+
   vPessoa.utilitario.LimpaTela(self);
-  edNome.SetFocus;
+  edCPF.SetFocus;
 end;
 
 end.

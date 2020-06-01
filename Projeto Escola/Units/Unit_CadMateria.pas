@@ -141,8 +141,8 @@ begin
     vConsulta.setTextosql('select m.id_materia ''Código'',' +
                           '       m.nome ''Nome'',' +
                           '       m.id_periodo ''Codigo Periodo'','+
-                          '       p.periodo ''Nome do Periodo'''+
-                          '       m.id_professor ''Codigo Professor'''+
+                          '       p.periodo ''Nome do Periodo'','+
+                          '       m.id_professor ''Codigo Professor'','+
                           '       pe.nome ''Nome Professor'''+
                           '  from materia m,periodo p, curso_materia cm, professor pr, pessoa pe'+
                           ' where m.id_periodo = p.id_periodo'+

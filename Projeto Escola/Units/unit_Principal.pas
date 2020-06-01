@@ -35,14 +35,12 @@ type
     mnPeriodo: TMenuItem;
     imgPrincipal: TImage;
     mnTurma: TMenuItem;
-    mnContato: TMenuItem;
     procedure MenuItem3Click(Sender: TObject);
     procedure mnCursoClick(Sender: TObject);
     procedure mnPeriodoClick(Sender: TObject);
     procedure mnChamadaClick(Sender: TObject);
     procedure mnTurmaClick(Sender: TObject);
     procedure mnMateriaClick(Sender: TObject);
-    procedure mnContatoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,18 +85,6 @@ begin
     vForm_Chamada.ShowModal;
   finally
     FreeAndNil(vForm_Chamada);
-  end;
-end;
-
-procedure Tform_Principal.mnContatoClick(Sender: TObject);
-var
-  vForm_CadContato : Tform_CadContato;
-begin
-  vForm_CadContato := Tform_CadContato.Create(Self);
-  try
-    vForm_CadContato.ShowModal;
-  finally
-    FreeAndNil(vForm_CadContato);
   end;
 end;
 

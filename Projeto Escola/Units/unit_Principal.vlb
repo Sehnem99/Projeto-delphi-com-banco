@@ -4,9 +4,6 @@ Coordinates=263,124,59,33
 [mnPeriodo]
 Coordinates=176,124,68,33
 
-[mnContato]
-Coordinates=89,124,68,33
-
 [mnTurma]
 Coordinates=10,124,61,33
 
@@ -30,5 +27,5 @@ Coordinates=10,78,76,33
 Coordinates=10,10,155,51
 
 []
-Coordinates=321,1,82,33
+Coordinates=89,124,68,33
 

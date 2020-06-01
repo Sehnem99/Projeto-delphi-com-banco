@@ -137,25 +137,7 @@ end;
 
 procedure Tform_CadContato.sbtnSalvarClick(Sender: TObject);
 begin
-  if (vContato.getEstado = 1) then
-      begin
-        vContato.slValores.Strings[1] := IntToStr(Integer(cbPessoa.Items.Objects[cbPessoa.ItemIndex]));;
-        vContato.slValores.Strings[2] := edEmail.Text;
-        vContato.slValores.Strings[3] := edTelefone.Text;
-        vContato.slValores.Strings[4] := edCelular.Text;
-      end
-  else
-      begin
-        vContato.slValores.Clear;
-        vContato.slValores.Add('0');
-        vContato.slValores.Add(IntToStr(Integer(cbPessoa.Items.Objects[cbPessoa.ItemIndex])));
-        vContato.slValores.Add(edEmail.Text);
-        vContato.slValores.Add(edTelefone.Text);
-        vContato.slValores.Add(edCelular.Text);
 
-      end;
-
-  vContato.insert(vContato.slValores);
   vContato.utilitario.LimpaTela(self);
   cbPessoa.SetFocus;
 end;

@@ -30,15 +30,6 @@ CREATE TABLE IF NOT EXISTS PESSOA (
   ATIVO  tinyint(2) default 1,
   PRIMARY KEY (ID_PESSOA))
 ENGINE = InnoDB;
-
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (1, 'Ginny', '458143853589', '2019-10-01', 1);
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (2, 'Russ',  '458153960015', '2019-09-03', 2);
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (3, 'Winnah','458469761211', '2020-03-10', 1);
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (4, 'Buckie','458691088072', '2019-10-12', 2);
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (5, 'Haily', '458200520274', '2020-02-15', 1);
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (6, 'Mickey','458708020936', '2019-07-28', 2);
-insert into pessoa (id_pessoa, nome, cpf, dt_nasc, tipo_pessoa) values (7, 'Fania', '458533853774', '2019-09-02', 1);
-
 -- -----------------------------------------------------
 -- Table ALUNO Tipo 2 
 -- -----------------------------------------------------
@@ -51,10 +42,6 @@ CREATE TABLE IF NOT EXISTS ALUNO (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-insert into aluno (id_aluno, id_pessoa) values (1, 2);
-insert into aluno (id_aluno, id_pessoa) values (2, 4);
-insert into aluno (id_aluno, id_pessoa) values (3, 6);
 
 -- -----------------------------------------------------
 -- Table PROFESSOR Tipo 1
@@ -69,11 +56,6 @@ CREATE TABLE IF NOT EXISTS PROFESSOR (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-insert into professor (id_professor, id_pessoa) values (1, 1);
-insert into professor (id_professor, id_pessoa) values (2, 3);
-insert into professor (id_professor, id_pessoa) values (3, 5);
-insert into professor (id_professor, id_pessoa) values (4, 7);
 
 -- -----------------------------------------------------
 -- Table TURMA
@@ -96,10 +78,6 @@ CREATE TABLE IF NOT EXISTS CURSO (
   ATIVO TINYINT(2) NULL,
   PRIMARY KEY (ID_CURSO))
 ENGINE = InnoDB;
-
-insert into curso (id_curso, nome, ativo) values (1, 'Analise e Desenvolvimento de sistemas',1);
-insert into curso (id_curso, nome, ativo) values (2, 'Tecnologia da desinformação',1);
-insert into curso (id_curso, nome, ativo) values (3, 'Estética e cosmética',1);
 
 
 -- -----------------------------------------------------
@@ -234,7 +212,9 @@ CREATE TABLE IF NOT EXISTS CONTATO (
   ID_CONTATO INT NOT NULL AUTO_INCREMENT,
   ID_PESSOA INT NOT NULL,
   EMAIL VARCHAR(45) NULL,
+  DDDTEL VARCHAR(3) NULL,
   TELEFONE VARCHAR(45) NULL,
+  DDDCEL VARCHAR(3) NOT NULL,
   CELULAR VARCHAR(45) NOT NULL,
   PRIMARY KEY (ID_CONTATO),
   CONSTRAINT fk_CONTATO_PESSOA1

@@ -22,7 +22,7 @@ object form_Chamada: Tform_Chamada
     object btnRegistrarDiario: TButton
       Anchors = []
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 4
+      ImageIndex = 2
       Position.X = 265.000000000000000000
       Position.Y = 13.000000000000000000
       Size.Width = 120.000000000000000000
@@ -104,7 +104,7 @@ object form_Chamada: Tform_Chamada
     end
     object sbConsulta: TSpeedButton
       Images = dm_BancoDados.ImageList1
-      ImageIndex = 0
+      ImageIndex = 1
       Position.X = 561.000000000000000000
       Position.Y = 64.000000000000000000
       Size.Width = 27.000000000000000000

@@ -89,7 +89,6 @@ var
   i : Integer;
   aluno_diario : TFDQuery;
   utilitario   : TUtilitario;
-
 begin
   utilitario := TUtilitario.Create;
 
@@ -97,20 +96,20 @@ begin
   aluno_diario.Connection := dm_BancoDados.FDEscola;
   aluno_diario.Close;
   aluno_diario.SQL.Clear;
-  aluno_diario.SQL.Add('select *');
-  aluno_diario.SQL.Add('from aluno a');
-  aluno_diario.SQL.Add('inner join aluno_turma b');
-  aluno_diario.SQL.Add('on a.ID_ALUNO = b.ID_ALUNO');
-  aluno_diario.SQL.Add('inner join aluno_turma_materia c');
-  aluno_diario.SQL.Add('on b.ID_ALUNO_TURMA = c.ID_ALUNO_TURMA');
-  aluno_diario.SQL.Add('inner join materia d');
-  aluno_diario.SQL.Add('on c.ID_MATERIA = d.ID_MATERIA');
-  aluno_diario.SQL.Add('inner join turma e');
-  aluno_diario.SQL.Add('on b.ID_TURMA = e.ID_TURMA');
-  aluno_diario.SQL.Add('inner join pessoa f');
-  aluno_diario.SQL.Add('on a.ID_PESSOA = f.ID_PESSOA');
-  aluno_diario.SQL.Add('where e.DESCRICAO =  "' + cbTurma.Items.Objects[cbTurma.ItemIndex].ToString + '" and "' + cbMateria.Items.Objects[cbMateria.ItemIndex].ToString + '"');
-
+  aluno_diario.SQL.Add('  select *');
+  aluno_diario.SQL.Add('    from aluno a');
+  aluno_diario.SQL.Add('   inner join aluno_turma b');
+  aluno_diario.SQL.Add('      on a.ID_ALUNO = b.ID_ALUNO');
+  aluno_diario.SQL.Add('   inner join aluno_turma_materia c');
+  aluno_diario.SQL.Add('      on b.ID_ALUNO_TURMA = c.ID_ALUNO_TURMA');
+  aluno_diario.SQL.Add('   inner join materia d');
+  aluno_diario.SQL.Add('      on c.ID_MATERIA = d.ID_MATERIA');
+  aluno_diario.SQL.Add('   inner join turma e');
+  aluno_diario.SQL.Add('      on b.ID_TURMA = e.ID_TURMA');
+  aluno_diario.SQL.Add('   inner join pessoa f');
+  aluno_diario.SQL.Add('      on a.ID_PESSOA = f.ID_PESSOA');
+  aluno_diario.SQL.Add('   where e.ID_TURMA    = ' + IntToStr(Integer((cbTurma.Items.Objects[cbTurma.ItemIndex]))) +
+                       '      and d.ID_MATERIA = ' + IntToStr(Integer((cbMateria.Items.Objects[cbMateria.ItemIndex]))));
   try
     aluno_diario.Open;
 
@@ -118,23 +117,23 @@ begin
        ShowMessage('Não há registros para esse filtro.');
 
     while not aluno_diario.Eof do
-              begin
-                utilitario.LimpaStringGrid(sgChamada);
-                aluno_diario.First;
+      begin
+        utilitario.LimpaStringGrid(sgChamada);
+        aluno_diario.First;
 
-                while (not aluno_diario.Eof) do
-                       begin
-                         if (sgChamada.Cells[0,0] <> '') then
-                             sgChamada.RowCount := sgChamada.RowCount + 1;
+        while (not aluno_diario.Eof) do
+          begin
+           if (sgChamada.Cells[0,0] <> '') then
+             sgChamada.RowCount := sgChamada.RowCount + 1;
 
-                         for i := 0 to aluno_diario.FieldCount -1 do
-                             sgChamada.Cells[i, sgChamada.RowCount -1] := aluno_diario.Fields[i].AsString;
+           for i := 0 to aluno_diario.FieldCount -1 do
+             sgChamada.Cells[i, sgChamada.RowCount -1] := aluno_diario.Fields[i].AsString;
 
-                            // sgChamada.Cells[aluno_diario.FieldCount, sgChamada.RowCount -1] := self.calculaFrequenciaGeral(StrToInt(dias_uteis_turma), aluno_diario.FieldByName('QTDE_FALTAS').AsInteger);
+              // sgChamada.Cells[aluno_diario.FieldCount, sgChamada.RowCount -1] := self.calculaFrequenciaGeral(StrToInt(dias_uteis_turma), aluno_diario.FieldByName('QTDE_FALTAS').AsInteger);
 
-                         aluno_diario.Next;
-                       end;
-              end;
+            aluno_diario.Next;
+          end;
+      end;
   except
     on e:exception do
       begin

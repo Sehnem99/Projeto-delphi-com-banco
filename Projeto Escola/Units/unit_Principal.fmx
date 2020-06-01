@@ -37,11 +37,6 @@ object form_Principal: Tform_Principal
         Text = 'Turma'
         OnClick = mnTurmaClick
       end
-      object mnContato: TMenuItem
-        Locked = True
-        Text = 'Contato'
-        OnClick = mnContatoClick
-      end
     end
     object mnChamada: TMenuItem
       Text = 'Chamada'

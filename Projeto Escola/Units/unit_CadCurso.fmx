@@ -117,7 +117,7 @@ object Form_CadCurso: TForm_CadCurso
     Position.X = 8.000000000000000000
     Position.Y = 96.000000000000000000
     Size.Width = 585.000000000000000000
-    Size.Height = 401.000000000000000000
+    Size.Height = 393.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object gridMaterias: TStringGrid

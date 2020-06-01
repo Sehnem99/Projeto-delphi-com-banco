@@ -57,10 +57,10 @@ begin
   try
     gridMaterias.ClearColumns;
     vConsulta.setTextosql('select a.id_materia  ''codigo'','#13+
-                          '       b.nome      ''nome'','#13+
+                          '       b.nome      ''nome'',    '#13+
                           '       c.periodo    ''periodo'' '#13+
                           'from curso_materia a, materia b,'#13+
-                          '     periodo c              '#13+
+                          '     periodo c                  '#13+
                           'where a.id_materia = b.id_materia  '#13+
                           'and b.id_periodo = c.id_periodo    '#13+
                           'and a.id_curso = ' + Format('%s', [vCurso.getCampoFromListaValores(0)]));
@@ -109,12 +109,13 @@ procedure TForm_CadCurso.sbtnBuscaClick(Sender: TObject);
 var
   vConsulta : TConsulta;
 begin
-  vConsulta := TConsulta.create;
+   vConsulta := TConsulta.create;
   try
     vConsulta.setTitulo('Consulta Cursos');
     vConsulta.setTextosql('Select id_curso ''Código'',' +
-                          'Nome Nome, Ativo ''Status'' '+
-                          'from curso order by nome');
+                          'Nome Nome, c.c.Ativo ''Cod Status'', IF(c.Ativo = 1, ''Ativo'', ''Inativo'')as ''Status'' '+
+                          'from curso c, periodo p   '+
+                          ' order by nome');
     vConsulta.getConsulta;
 
     if (vConsulta.getRetorno <> '') then
@@ -123,28 +124,16 @@ begin
 
              if (vCurso.isExiteSlvalores) then
                begin
-                    edNome.Text := vCurso.getCampoFromListaValores(1);
-                    cbStatus.ItemIndex := StrToInt(vCurso.getCampoFromListaValores(2)) + 1;
-                    vCurso.estado := 1;
-
-                    vConsulta.setTextosql('select * '+#13+
-                                          '  from curso_materia'+#13+
-                                          ' where id_curso = '+
-                                          Format('%s', [vCurso.getCampoFromListaValores(0)]));
-
-                    vCadCurso_Materia.slCampos.Add('ID_CURSO_MATERIA');
-                    vCadCurso_Materia.slCampos.Add('ID_CURSO');
-                    vCadCurso_Materia.slCampos.Add('ID_MATERIA');
-                    vCadCurso_Materia.slValores := vConsulta.getConsultaDados(vCadCurso_Materia.slCampos);
-
-
+                  edNome.Text := vCurso.getCampoFromListaValores(1);
+                  cbStatus.ItemIndex := StrToInt(vCurso.getCampoFromListaValores(2)) + 1;
+                  vCurso.estado := 1;
                end
              else
-                 begin
-                      vCurso.estado := 0;
-                      edNome.Text := '';
-                      cbStatus.ItemIndex := -1;
-                 end;
+               begin
+                  vCurso.estado := 0;
+                  edNome.Text := '';
+                  cbStatus.ItemIndex := -1;
+               end;
        end;
      CaregaStringGrid(StrToInt(vCurso.getCampoFromListaValores(0)));
   finally
